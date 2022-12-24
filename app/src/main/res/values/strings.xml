@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DemoPlatzi</string>
+    <string name="something_went_wrong">Algo salio mal</string>
+    <string name="button_retry">Reintentar</string>
+</resources>
