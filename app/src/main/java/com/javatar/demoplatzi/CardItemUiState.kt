@@ -1,9 +1,12 @@
 package com.javatar.demoplatzi
 
 import com.javatar.domain.models.Card
+import com.javatar.domain.value
 
 
-data class CardItemUiState(private val card: Card) : BaseUiState() {
-    fun getImageUrl() = card.images.firstOrNull()?.url
-    fun getName() = card.name
+data class CardItemUiState(var card: Card? = null) : BaseUiState() {
+    fun getImageUrl() = card?.images?.firstOrNull()?.url.value()
+    fun getImageSmallUrl() = card?.images?.firstOrNull()?.urlSmall.value()
+    fun getName() = card?.name.value()
+    fun getDescription() = card?.desc.value()
 }

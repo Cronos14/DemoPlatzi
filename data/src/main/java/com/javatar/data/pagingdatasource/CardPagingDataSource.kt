@@ -3,6 +3,7 @@ package com.javatar.data.pagingdatasource
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.javatar.data.datasource.remote.response.toCard
+import com.javatar.data.datasource.remote.response.toMonsterCard
 import com.javatar.data.network.Api
 import com.javatar.domain.models.Card
 
@@ -20,9 +21,9 @@ class CardPagingDataSource(
         val page = params.key ?: STARTING_PAGE_INDEX
         return try {
             val results = params.loadSize
-            val response = api.getMonsterCards("", page * results, results)
+            val response = api.getMonsterCards( offset = page * results, num = results)
             val result = response.body()?.data?.map {
-                it.toCard()
+                it.toMonsterCard()
             } ?: emptyList()
             LoadResult.Page(
                 data = result,

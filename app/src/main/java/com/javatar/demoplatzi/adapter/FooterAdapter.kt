@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import com.javatar.demoplatzi.databinding.ItemPagingFooterBinding
+import com.javatar.demoplatzi.viewholder.FooterViewHolder
 
 class FooterAdapter(
     private val retry: () -> Unit

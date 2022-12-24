@@ -6,9 +6,13 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.javatar.demoplatzi.CardItemUiState
 import com.javatar.demoplatzi.databinding.ItemCardBinding
+import com.javatar.demoplatzi.viewholder.CardViewHolder
+import com.javatar.domain.models.Card
 import javax.inject.Inject
 
-class CardsAdapter @Inject constructor() :
+class CardsAdapter constructor(
+    private val onCardClick: (card: CardItemUiState) -> Unit
+) :
     PagingDataAdapter<CardItemUiState, CardViewHolder>(Comparator) {
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
@@ -17,7 +21,7 @@ class CardsAdapter @Inject constructor() :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false).apply {
-            return CardViewHolder(this)
+            return CardViewHolder(this, onCardClick)
         }
     }
 

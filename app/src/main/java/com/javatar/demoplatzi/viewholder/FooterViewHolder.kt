@@ -1,7 +1,8 @@
-package com.javatar.demoplatzi.adapter
+package com.javatar.demoplatzi.viewholder
 
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
+import com.javatar.demoplatzi.models.FooterUiState
 import com.javatar.demoplatzi.databinding.ItemPagingFooterBinding
 
 class FooterViewHolder(
@@ -10,14 +11,14 @@ class FooterViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     init {
-        binding.btnRetry.setOnClickListener { retry.invoke() }
+        binding.buttonRetry.setOnClickListener { retry.invoke() }
     }
 
     fun bind(loadState: LoadState) {
         with(binding) {
             val footerUiState = FooterUiState(loadState)
             progressBar.visibility = footerUiState.getLoadingVisibility()
-            btnRetry.visibility = footerUiState.getErrorVisibility()
+            buttonRetry.visibility = footerUiState.getErrorVisibility()
             tvError.visibility = footerUiState.getErrorVisibility()
             tvError.text = footerUiState.getErrorMessage(binding.root.context)
         }

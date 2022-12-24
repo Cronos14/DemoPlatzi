@@ -9,7 +9,7 @@ data class GeneralResponse<T : CardResponse>(
 
 data class MetaResponse(
     @SerializedName("next_page")
-    private val nextPage: String?,
+    val nextPage: String?,
     @SerializedName("next_page_offset")
-    private val nextPageOffset: Int?,
+    val nextPageOffset: Int?,
 )

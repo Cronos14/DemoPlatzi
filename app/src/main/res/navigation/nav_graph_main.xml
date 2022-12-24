@@ -9,5 +9,21 @@
         android:id="@+id/cardsFragment"
         android:name="com.javatar.demoplatzi.fragment.CardsFragment"
         android:label="fragment_cards"
-        tools:layout="@layout/fragment_cards" />
+        tools:layout="@layout/fragment_cards" >
+        <action
+            android:id="@+id/action_cardsFragment_to_cardDetailFragment"
+            app:destination="@id/cardDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardDetailFragment"
+        android:name="com.javatar.demoplatzi.fragment.CardDetailFragment"
+        android:label="CardDetailFragment" >
+        <action
+            android:id="@+id/action_cardDetailFragment_to_deckFragment"
+            app:destination="@id/deckFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/deckFragment"
+        android:name="com.javatar.demoplatzi.fragment.DeckFragment"
+        android:label="DeckFragment" />
 </navigation>

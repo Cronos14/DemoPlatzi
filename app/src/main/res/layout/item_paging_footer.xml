@@ -7,20 +7,20 @@
     android:padding="10dp">
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
     <Button
-        android:id="@+id/btnRetry"
+        android:id="@+id/button_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/button_retry" />
 
     <TextView
-        android:id="@+id/tvError"
+        android:id="@+id/tv_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

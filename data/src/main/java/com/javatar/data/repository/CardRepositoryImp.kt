@@ -4,6 +4,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.javatar.data.datasource.RemoteDataSource
+import com.javatar.data.datasource.local.CardLocalDatasourceFacade
+import com.javatar.data.datasource.local.LocalDataSource
 import com.javatar.data.datasource.remote.response.toCard
 import com.javatar.data.datasource.remote.response.toMonsterCard
 import com.javatar.data.datasource.remote.response.toSpellCard
@@ -17,7 +19,7 @@ import com.javatar.domain.repository.CardRepository
 import kotlinx.coroutines.flow.Flow
 
 class CardRepositoryImp(
-    private val remoteDataSource: RemoteDataSource
+    private val remoteDataSource: RemoteDataSource,
 ) : CardRepository {
     override suspend fun getCards(name: String): List<Card> {
         val result = remoteDataSource.api.getCards(
@@ -73,6 +75,6 @@ class CardRepositoryImp(
     }
 
     companion object {
-        const val NETWORK_PAGE_SIZE = 10
+        const val NETWORK_PAGE_SIZE = 20
     }
 }

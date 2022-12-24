@@ -1,37 +1,49 @@
 package com.javatar.demoplatzi.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.javatar.demoplatzi.*
+import androidx.recyclerview.widget.GridLayoutManager
+import com.javatar.demoplatzi.CardItemUiState
+import com.javatar.demoplatzi.R
 import com.javatar.demoplatzi.adapter.CardsAdapter
 import com.javatar.demoplatzi.adapter.FooterAdapter
+import com.javatar.demoplatzi.collect
+import com.javatar.demoplatzi.collectLast
 import com.javatar.demoplatzi.databinding.FragmentCardsBinding
+import com.javatar.demoplatzi.listener.OnCardDataListener
+import com.javatar.demoplatzi.models.CardsUiState
 import com.javatar.demoplatzi.viewmodel.CardsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class CardsFragment : Fragment(R.layout.fragment_cards) {
 
     private lateinit var binding: FragmentCardsBinding
     private val viewModel: CardsViewModel by viewModels()
+    private var onCardDataListener: OnCardDataListener? = null
 
-    @Inject
     lateinit var cardsAdapter: CardsAdapter
+
+    private val cardNavController by lazy {
+        findNavController()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnCardDataListener) {
+            onCardDataListener = context
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +69,10 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
 
 //        viewModel.getCards()
 
+        cardsAdapter = CardsAdapter {
+            onCardDataListener?.getData()?.card = it.card
+            cardNavController.navigate(R.id.action_cardsFragment_to_cardDetailFragment)
+        }
         setRetryListener()
         setAdapter()
         collectLast(viewModel.cardsUiStates, ::setCards)
@@ -74,7 +90,7 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
         )
         binding.recyclerViewCards.adapter =
             cardsAdapter.withLoadStateFooter(FooterAdapter(cardsAdapter::retry))
-        binding.recyclerViewCards.layoutManager = LinearLayoutManager(context)
+        binding.recyclerViewCards.layoutManager = GridLayoutManager(context, LIMIT_ROW)
 
     }
 
@@ -93,5 +109,9 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
 
     private suspend fun setCards(cardsPagingData: PagingData<CardItemUiState>) {
         cardsAdapter.submitData(cardsPagingData)
+    }
+
+    companion object {
+        const val LIMIT_ROW = 5
     }
 }

@@ -15,7 +15,7 @@ interface Api {
 
     @GET("api/v7/cardinfo.php")
     suspend fun getMonsterCards(
-        @Query("fname") name: String?,
+        @Query("fname") name: String? = "",
         @Query("offset") offset: Int?,
         @Query("num") num: Int?,
         @Query("type") type: String? = "Effect Monster,Normal Monster"
@@ -23,7 +23,7 @@ interface Api {
 
     @GET("api/v7/cardinfo.php")
     suspend fun getSpellCards(
-        @Query("fname") name: String?,
+        @Query("fname") name: String? = "",
         @Query("offset") offset: Int?,
         @Query("num") num: Int?,
         @Query("type") type: String? = "Spell card"
@@ -31,7 +31,7 @@ interface Api {
 
     @GET("api/v7/cardinfo.php")
     suspend fun getTrapCards(
-        @Query("fname") name: String?,
+        @Query("fname") name: String? = "",
         @Query("offset") offset: Int?,
         @Query("num") num: Int?,
         @Query("type") type: String? = "Trap card"

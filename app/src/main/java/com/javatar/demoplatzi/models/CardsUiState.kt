@@ -1,13 +1,17 @@
-package com.javatar.demoplatzi.adapter
+package com.javatar.demoplatzi.models
 
 import android.content.Context
 import androidx.paging.LoadState
 import com.javatar.demoplatzi.BaseUiState
 import com.javatar.demoplatzi.R
 
-data class FooterUiState(private val loadState: LoadState) : BaseUiState() {
+data class CardsUiState(
+    private val loadState: LoadState
+) : BaseUiState() {
 
-    fun getLoadingVisibility() = getViewVisibility(isVisible = loadState is LoadState.Loading)
+    fun getProgressBarVisibility() = getViewVisibility(isVisible = loadState is LoadState.Loading)
+
+    fun getListVisibility() = getViewVisibility(isVisible = loadState is LoadState.NotLoading)
 
     fun getErrorVisibility() = getViewVisibility(isVisible = loadState is LoadState.Error)
 
