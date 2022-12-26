@@ -2,9 +2,7 @@ package com.javatar.demoplatzi.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,7 +11,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.javatar.demoplatzi.R
 import com.javatar.demoplatzi.databinding.FragmentCardDetailBinding
+import com.javatar.demoplatzi.listener.OnBottomNavigationActions
 import com.javatar.demoplatzi.listener.OnCardDataListener
+import com.javatar.demoplatzi.listener.OnToolbarActions
 import com.javatar.demoplatzi.viewmodel.CardDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +23,9 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
     private val viewModel: CardDetailViewModel by viewModels()
     private lateinit var binding: FragmentCardDetailBinding
     private var onCardDataListener: OnCardDataListener? = null
+    private var onToolbarActions: OnToolbarActions? = null
+    private var onBottomNavigationActions: OnBottomNavigationActions? = null
+
     private val cardNavController by lazy {
         findNavController()
     }
@@ -32,6 +35,17 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
         if (context is OnCardDataListener) {
             onCardDataListener = context
         }
+        if (context is OnToolbarActions) {
+            onToolbarActions = context
+        }
+        if (context is OnBottomNavigationActions) {
+            onBottomNavigationActions = context
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -44,8 +58,36 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onToolbarActions?.apply {
+            isEnabledIconBack(true)
+        }
+        onBottomNavigationActions?.apply {
+            hideBottomNavigation()
+        }
         onCardDataListener?.let { data ->
             showView()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_detail_card, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_save -> {
+                onCardDataListener?.let { data ->
+                    data.getData().card?.let { card ->
+                        viewModel.saveCard(card)
+                        Toast.makeText(context, "Carta Agregada al Deck", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                true
+            }
+            R.id.action_delete -> {
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -56,15 +98,6 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
                     .load(data.getData().getImageUrl())
                     .diskCacheStrategy(DiskCacheStrategy.DATA)
                     .into(imageViewCard)
-                imageViewAdd.setOnClickListener {
-                    data.getData().card?.let { card ->
-                        viewModel.saveCard(card)
-                        Toast.makeText(context, "Carta Agregada al Deck", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                imageViewDelete.setOnClickListener {
-                    cardNavController.navigate(R.id.action_cardDetailFragment_to_deckFragment)
-                }
             }
         }
     }

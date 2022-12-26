@@ -18,7 +18,9 @@ import com.javatar.demoplatzi.adapter.FooterAdapter
 import com.javatar.demoplatzi.collect
 import com.javatar.demoplatzi.collectLast
 import com.javatar.demoplatzi.databinding.FragmentCardsBinding
+import com.javatar.demoplatzi.listener.OnBottomNavigationActions
 import com.javatar.demoplatzi.listener.OnCardDataListener
+import com.javatar.demoplatzi.listener.OnToolbarActions
 import com.javatar.demoplatzi.models.CardsUiState
 import com.javatar.demoplatzi.viewmodel.CardsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,6 +33,8 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
     private lateinit var binding: FragmentCardsBinding
     private val viewModel: CardsViewModel by viewModels()
     private var onCardDataListener: OnCardDataListener? = null
+    private var onToolbarActions: OnToolbarActions? = null
+    private var onBottomNavigationActions: OnBottomNavigationActions? = null
 
     lateinit var cardsAdapter: CardsAdapter
 
@@ -42,6 +46,12 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
         super.onAttach(context)
         if (context is OnCardDataListener) {
             onCardDataListener = context
+        }
+        if (context is OnToolbarActions) {
+            onToolbarActions = context
+        }
+        if (context is OnBottomNavigationActions) {
+            onBottomNavigationActions = context
         }
     }
 
@@ -55,20 +65,12 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        binding.test.text = "Hola"
-//
-//        viewModel.cards.observe(viewLifecycleOwner) { it ->
-//            var chain = ""
-//            it.forEach { card ->
-//                chain += "$card'\n\n\n'"
-//            }
-//
-//            binding.test.text = chain
-//        }
-
-//        viewModel.getCards()
-
+        onToolbarActions?.apply {
+            isEnabledIconBack(false)
+        }
+        onBottomNavigationActions?.apply {
+            showBottomNavigation()
+        }
         cardsAdapter = CardsAdapter {
             onCardDataListener?.getData()?.card = it.card
             cardNavController.navigate(R.id.action_cardsFragment_to_cardDetailFragment)

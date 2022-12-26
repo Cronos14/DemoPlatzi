@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="match_constraint">0dp</dimen>
+    <dimen name="spacing_0">0dp</dimen>
+    <dimen name="spacing_0_25">2dp</dimen>
+    <dimen name="spacing_0_5">4dp</dimen>
+    <dimen name="spacing_1">8dp</dimen>
+    <dimen name="spacing_1_5">12dp</dimen>
+    <dimen name="spacing_2">16dp</dimen>
+    <dimen name="spacing_2_5">20dp</dimen>
+    <dimen name="spacing_3">24dp</dimen>
+    <dimen name="spacing_bottom_height">56dp</dimen>
+    <dimen name="spacing_image_view_card_width">100dp</dimen>
+    <dimen name="spacing_image_view_card_height">180dp</dimen>
 </resources>

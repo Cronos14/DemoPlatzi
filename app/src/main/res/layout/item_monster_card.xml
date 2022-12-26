@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:background="@color/white"
+    android:padding="@dimen/spacing_2">
 
     <ImageView
         android:id="@+id/image_view_card"
-        android:layout_width="100dp"
-        android:layout_height="180dp"
+        android:layout_width="@dimen/spacing_image_view_card_width"
+        android:layout_height="@dimen/spacing_image_view_card_height"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,22 +18,24 @@
 
     <TextView
         android:id="@+id/text_view_name"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/spacing_0"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         tools:text="Title"
-        android:layout_marginStart="8dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="@dimen/spacing_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image_view_card"
         app:layout_constraintTop_toTopOf="@+id/image_view_card" />
 
     <TextView
         android:id="@+id/text_view_description"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="@dimen/spacing_0"
+        android:layout_height="@dimen/spacing_0"
+        android:layout_marginTop="@dimen/spacing_0_5"
         tools:text="Description"
-        android:layout_marginStart="8dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="@dimen/spacing_1"
         app:layout_constraintBottom_toTopOf="@+id/text_view_atk"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image_view_card"
@@ -42,8 +45,8 @@
         android:id="@+id/text_view_atk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="TextView"
+        android:layout_marginEnd="@dimen/spacing_2"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/text_view_def" />
 
@@ -51,7 +54,7 @@
         android:id="@+id/text_view_def"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
