@@ -6,7 +6,6 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.javatar.demoplatzi.R
@@ -25,10 +24,6 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
     private var onCardDataListener: OnCardDataListener? = null
     private var onToolbarActions: OnToolbarActions? = null
     private var onBottomNavigationActions: OnBottomNavigationActions? = null
-
-    private val cardNavController by lazy {
-        findNavController()
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -85,6 +80,12 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
                 true
             }
             R.id.action_delete -> {
+                onCardDataListener?.let { data ->
+                    data.getData().card?.let { card ->
+                        viewModel.deleteCard(card)
+                        Toast.makeText(context, "Carta borrada del Deck", Toast.LENGTH_SHORT).show()
+                    }
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)

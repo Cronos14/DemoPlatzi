@@ -15,11 +15,12 @@
             app:destination="@id/cardDetailFragment" />
     </fragment>
     <fragment
+        android:id="@+id/deckFragment"
+        android:name="com.javatar.demoplatzi.fragment.DeckFragment"
+        android:label="DeckFragment" >
+    </fragment>
+    <fragment
         android:id="@+id/cardDetailFragment"
         android:name="com.javatar.demoplatzi.fragment.CardDetailFragment"
         android:label="CardDetailFragment" />
-    <fragment
-        android:id="@+id/deckFragment"
-        android:name="com.javatar.demoplatzi.fragment.DeckFragment"
-        android:label="DeckFragment" />
 </navigation>

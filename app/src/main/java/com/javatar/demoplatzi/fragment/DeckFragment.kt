@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.javatar.demoplatzi.R
 import com.javatar.demoplatzi.adapter.ComponentAdapter
@@ -26,6 +27,10 @@ class DeckFragment : Fragment(R.layout.fragment_deck) {
     private val components = arrayListOf<Component>()
     private var onToolbarActions: OnToolbarActions? = null
     private var onBottomNavigationActions: OnBottomNavigationActions? = null
+
+    private val cardNavController by lazy {
+        findNavController()
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -76,5 +81,4 @@ class DeckFragment : Fragment(R.layout.fragment_deck) {
             binding.recyclerViewDeck.adapter?.notifyDataSetChanged()
         }
     }
-
 }

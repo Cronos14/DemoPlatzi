@@ -12,19 +12,26 @@ import com.javatar.domain.repository.DeckRepository
 class DeckRepositoryImp(
     private val cardLocalDatasourceFacade: CardLocalDatasourceFacade
 ) : DeckRepository {
-    override suspend fun saveMonsterCard(card: MonsterCard) {
-        cardLocalDatasourceFacade.monsterCardLocalDatasource.insert(card.toEntity())
+
+    override suspend fun saveCard(card: Card): Long {
+        return when (card) {
+            is MonsterCard -> cardLocalDatasourceFacade.monsterCardLocalDatasource.insert(card.toEntity())
+            is SpellCard -> cardLocalDatasourceFacade.spellCardLocalDatasource.insert(card.toEntity())
+            is TrapCard -> cardLocalDatasourceFacade.trapCardLocalDatasource.insert(card.toEntity())
+            else -> return -1
+        }
     }
 
-    override suspend fun saveSpellCard(card: SpellCard) {
-        cardLocalDatasourceFacade.spellCardLocalDatasource.insert(card.toEntity())
+    override suspend fun deleteCard(card: Card) {
+        return when (card) {
+            is MonsterCard -> cardLocalDatasourceFacade.monsterCardLocalDatasource.delete(card.toEntity())
+            is SpellCard -> cardLocalDatasourceFacade.spellCardLocalDatasource.delete(card.toEntity())
+            is TrapCard -> cardLocalDatasourceFacade.trapCardLocalDatasource.delete(card.toEntity())
+            else -> return
+        }
     }
 
-    override suspend fun saveTrapCard(card: TrapCard) {
-        cardLocalDatasourceFacade.trapCardLocalDatasource.insert(card.toEntity())
-    }
-
-    override suspend fun getCards(name: String): List<Card> {
+    override suspend fun getCards(nameDeck: String): List<Card> {
         val list = mutableListOf<Card>()
         list.addAll(getMonsterCards())
         list.addAll(getSpellCards())

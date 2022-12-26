@@ -39,6 +39,11 @@ class MonsterCardView {
                     textViewDescription.text = it.description
                     textViewAtk.text = it.attack.toString()
                     textViewDef.text = it.defense.toString()
+                    componentClickListener?.onComponentClicked(
+                        DeckHolderListener.GeneralItemClickListener(
+                            it
+                        )
+                    )
                 }
             }
         }
