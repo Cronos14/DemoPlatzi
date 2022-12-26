@@ -30,20 +30,22 @@ class MonsterCardView {
             val cardComponent = component as? MonsterCardComponent
 
             with(binding) {
-                cardComponent?.let {
+                cardComponent?.let { card ->
                     Glide.with(imageViewCard)
-                        .load(it.urlSmall)
+                        .load(card.urlSmall)
                         .diskCacheStrategy(DiskCacheStrategy.DATA)
                         .into(imageViewCard)
-                    textViewName.text = it.name
-                    textViewDescription.text = it.description
-                    textViewAtk.text = it.attack.toString()
-                    textViewDef.text = it.defense.toString()
-                    componentClickListener?.onComponentClicked(
-                        DeckHolderListener.GeneralItemClickListener(
-                            it
+                    textViewName.text = card.name
+                    textViewDescription.text = card.description
+                    textViewAtk.text = card.attack.toString()
+                    textViewDef.text = card.defense.toString()
+                    root.setOnClickListener {
+                        componentClickListener?.onComponentClicked(
+                            DeckHolderListener.GeneralItemClickListener(
+                                card
+                            )
                         )
-                    )
+                    }
                 }
             }
         }

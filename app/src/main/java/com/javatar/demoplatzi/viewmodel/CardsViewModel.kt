@@ -12,13 +12,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CardsViewModel @Inject constructor(
-    cardsUseCase: CardUseCase
+    private val cardsUseCase: CardUseCase
 ) : ViewModel() {
 
-    val cardsUiStates = cardsUseCase.getCardsFlow()
+    fun getCards() = cardsUseCase.getCards()
         .map { pagingData ->
             pagingData.map {
                 CardItemUiState(it)
             }
         }.cachedIn(viewModelScope)
+
 }

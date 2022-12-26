@@ -12,19 +12,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.javatar.demoplatzi.R
 import com.javatar.demoplatzi.adapter.ComponentAdapter
 import com.javatar.demoplatzi.component.Component
+import com.javatar.demoplatzi.component.MonsterCardComponent
+import com.javatar.demoplatzi.component.toCard
 import com.javatar.demoplatzi.databinding.FragmentDeckBinding
 import com.javatar.demoplatzi.factory.DeckViewHolderFactory
+import com.javatar.demoplatzi.listener.ComponentClickListener
 import com.javatar.demoplatzi.listener.OnBottomNavigationActions
+import com.javatar.demoplatzi.listener.OnCardDataListener
 import com.javatar.demoplatzi.listener.OnToolbarActions
+import com.javatar.demoplatzi.viewholder.DeckHolderListener
 import com.javatar.demoplatzi.viewmodel.DeckViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DeckFragment : Fragment(R.layout.fragment_deck) {
+class DeckFragment : Fragment(R.layout.fragment_deck), ComponentClickListener<DeckHolderListener> {
 
     private lateinit var binding: FragmentDeckBinding
     private val viewModel: DeckViewModel by viewModels()
     private val components = arrayListOf<Component>()
+    private var onCardDataListener: OnCardDataListener? = null
     private var onToolbarActions: OnToolbarActions? = null
     private var onBottomNavigationActions: OnBottomNavigationActions? = null
 
@@ -34,6 +40,9 @@ class DeckFragment : Fragment(R.layout.fragment_deck) {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        if (context is OnCardDataListener) {
+            onCardDataListener = context
+        }
         if (context is OnToolbarActions) {
             onToolbarActions = context
         }
@@ -61,7 +70,8 @@ class DeckFragment : Fragment(R.layout.fragment_deck) {
         with(binding) {
             recyclerViewDeck.adapter = ComponentAdapter(
                 DeckViewHolderFactory(),
-                components
+                components,
+                this@DeckFragment
             )
 
             recyclerViewDeck.layoutManager =
@@ -79,6 +89,20 @@ class DeckFragment : Fragment(R.layout.fragment_deck) {
             components.clear()
             components.addAll(it)
             binding.recyclerViewDeck.adapter?.notifyDataSetChanged()
+        }
+    }
+
+    override fun onComponentClicked(clicked: DeckHolderListener) {
+        when (clicked) {
+            is DeckHolderListener.GeneralItemClickListener -> {
+                val component = clicked.component
+                if (component is MonsterCardComponent) {
+                    onCardDataListener?.getData()?.card = component.toCard()
+                    cardNavController.navigate(
+                        R.id.action_deckFragment_to_deleteCardDetailFragment
+                    )
+                }
+            }
         }
     }
 }

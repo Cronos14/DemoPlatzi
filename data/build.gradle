@@ -50,4 +50,16 @@ dependencies {
     //Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_core_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
+
+    //Test
+    testImplementation 'junit:junit:4.13.2'
+
+    //Mockito
+    testImplementation "org.mockito:mockito-inline:$mockito_inline_version"
+
+    //Coroutines Test
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinx_coroutines_core"
+
+    //Arch Core
+    testImplementation "androidx.arch.core:core-testing:$arch_core_testing"
 }

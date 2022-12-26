@@ -8,8 +8,7 @@ import com.javatar.domain.models.TrapCard
 import kotlinx.coroutines.flow.Flow
 
 interface CardUseCase {
-    suspend fun getCards(): List<Card>
-    fun getCardsFlow(): Flow<PagingData<Card>>
+    fun getCards(): Flow<PagingData<Card>>
     suspend fun getMonsterCards(): List<MonsterCard>
     suspend fun getSpellCards(): List<SpellCard>
     suspend fun getTrapCards(): List<TrapCard>

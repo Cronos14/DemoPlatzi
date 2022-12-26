@@ -6,10 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.javatar.demoplatzi.component.Component
 import com.javatar.demoplatzi.component.toComponent
-import com.javatar.domain.models.Card
-import com.javatar.domain.models.MonsterCard
-import com.javatar.domain.models.SpellCard
-import com.javatar.domain.models.TrapCard
+import com.javatar.domain.models.*
 import com.javatar.domain.usecase.DeckUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -36,7 +33,7 @@ class DeckViewModel @Inject constructor(
             is MonsterCard -> card.toComponent()
             is SpellCard -> card.toComponent()
             is TrapCard -> card.toComponent()
-            else -> TODO()
+            else -> card.toComponent()
         }
     }
 }

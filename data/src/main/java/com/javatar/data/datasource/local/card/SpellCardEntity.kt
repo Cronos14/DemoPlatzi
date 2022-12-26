@@ -1,11 +1,3 @@
-/*
- * Nissan MX Copyright
- * VehicleEntity.kt
- * MyNissanApp Android
- * Created by raultadeo.gonzalez on 07/12/21 14:27
- * Copyright © 07/12/21 14:27 Globant. All rights reserved.
- */
-
 package com.javatar.data.datasource.local.card
 
 import androidx.room.Entity

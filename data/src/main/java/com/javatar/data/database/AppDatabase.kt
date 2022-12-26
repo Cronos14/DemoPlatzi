@@ -1,11 +1,3 @@
-/*
- * Nissan MX Copyright
- * InMemoryAppDatabase.kt
- * MyNissanApp Android
- * Created by raultadeo.gonzalez on 06/12/21 21:20
- * Copyright © 06/12/21 21:20 Globant. All rights reserved.
- */
-
 package com.javatar.data.database
 
 import android.content.Context

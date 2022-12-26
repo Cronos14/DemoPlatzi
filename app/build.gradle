@@ -72,4 +72,13 @@ dependencies {
 
     //Paging
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
+    //Mockito
+    testImplementation "org.mockito:mockito-inline:$mockito_inline_version"
+
+    //Coroutines Test
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$kotlinx_coroutines_core"
+
+    //Arch Core
+    testImplementation "androidx.arch.core:core-testing:$arch_core_testing"
 }

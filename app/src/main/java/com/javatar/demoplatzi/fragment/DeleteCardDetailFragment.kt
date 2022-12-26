@@ -18,7 +18,7 @@ import com.javatar.demoplatzi.viewmodel.CardDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
+class DeleteCardDetailFragment : Fragment(R.layout.fragment_card_detail) {
 
     private val viewModel: CardDetailViewModel by viewModels()
     private lateinit var binding: FragmentCardDetailBinding
@@ -75,7 +75,6 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
                 onCardDataListener?.let { data ->
                     data.getData().card?.let { card ->
                         viewModel.saveCard(card)
-                        findNavController().navigateUp()
                         Toast.makeText(context, resources.getText(R.string.message_add_card), Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -86,6 +85,7 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
                     data.getData().card?.let { card ->
                         viewModel.deleteCard(card)
                         Toast.makeText(context, resources.getText(R.string.message_delete_card), Toast.LENGTH_SHORT).show()
+                        findNavController().navigateUp()
                     }
                 }
                 true

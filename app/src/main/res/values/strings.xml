@@ -2,6 +2,8 @@
     <string name="app_name">DemoPlatzi</string>
     <string name="something_went_wrong">Algo salio mal</string>
     <string name="button_retry">Reintentar</string>
+    <string name="message_add_card">Carta Agregada al Deck</string>
+    <string name="message_delete_card">Carta borrada del Deck</string>
     <string name="menu_cards">Cartas</string>
     <string name="menu_deck">Mazo</string>
     <string name="menu_save">Guardar</string>

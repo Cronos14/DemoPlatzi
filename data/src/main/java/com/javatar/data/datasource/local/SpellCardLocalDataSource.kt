@@ -1,11 +1,3 @@
-/*
- * Nissan MX Copyright
- * VehicleLocalDataSource.kt
- * MyNissanApp Android
- * Created by raultadeo.gonzalez on 10/02/22 0:13
- * Copyright © 10/02/22 0:13 Globant. All rights reserved.
- */
-
 package com.javatar.data.datasource.local
 
 import com.javatar.data.dao.SpellCardDao
@@ -28,10 +20,6 @@ class SpellCardLocalDataSource(
 
     override suspend fun update(element: SpellCardEntity) {
         dao.update(element)
-    }
-
-    override suspend fun delete(id: String) {
-        dao.delete(id)
     }
 
     override suspend fun delete(element: SpellCardEntity) {

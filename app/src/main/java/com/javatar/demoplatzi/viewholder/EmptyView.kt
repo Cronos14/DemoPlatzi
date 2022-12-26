@@ -1,11 +1,3 @@
-/*
- * Nissan MX Copyright
- * EmptyView.kt
- * MyNissanApp Android
- * Created by jaive.torres on 9/10/21, 4:25 PM
- * Copyright © 9/10/21, 4:25 PM Globant. All rights reserved. (e
- */
-
 package com.javatar.demoplatzi.viewholder
 
 import android.view.LayoutInflater

@@ -77,7 +77,7 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
         }
         setRetryListener()
         setAdapter()
-        collectLast(viewModel.cardsUiStates, ::setCards)
+        collectLast(viewModel.getCards(), ::setCards)
     }
 
     private fun setRetryListener() {
