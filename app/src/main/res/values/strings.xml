@@ -4,6 +4,7 @@
     <string name="button_retry">Reintentar</string>
     <string name="message_add_card">Carta Agregada al Deck</string>
     <string name="message_delete_card">Carta borrada del Deck</string>
+    <string name="message_deck_empty">Aun no tienes cartas en tu mazo</string>
     <string name="menu_cards">Cartas</string>
     <string name="menu_deck">Mazo</string>
     <string name="menu_save">Guardar</string>

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -77,6 +78,7 @@ class DeckFragment : Fragment(R.layout.fragment_deck), ComponentClickListener<De
         }
 
         setupDeck()
+        setupEmpty()
         viewModel.getDeck()
     }
 
@@ -86,8 +88,22 @@ class DeckFragment : Fragment(R.layout.fragment_deck), ComponentClickListener<De
         ) {
             components.clear()
             components.addAll(it)
+            showEmpty(false)
             binding.recyclerViewDeck.adapter?.notifyDataSetChanged()
         }
+    }
+
+    private fun setupEmpty() {
+        viewModel.empty.observe(
+            viewLifecycleOwner
+        ) {
+            showEmpty(true)
+        }
+    }
+
+    private fun showEmpty(value: Boolean) {
+        binding.textViewEmpty.isVisible = value
+        binding.recyclerViewDeck.isVisible = !value
     }
 
     override fun onComponentClicked(clicked: DeckHolderListener) {

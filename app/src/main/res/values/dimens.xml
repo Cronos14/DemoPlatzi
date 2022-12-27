@@ -12,4 +12,6 @@
     <dimen name="spacing_bottom_height">56dp</dimen>
     <dimen name="spacing_image_view_card_width">100dp</dimen>
     <dimen name="spacing_image_view_card_height">180dp</dimen>
+    <dimen name="spacing_image_view_retry">56dp</dimen>
+    <dimen name="text_size_2">20sp</dimen>
 </resources>

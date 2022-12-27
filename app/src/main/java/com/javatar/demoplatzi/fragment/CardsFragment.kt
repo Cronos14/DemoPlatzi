@@ -81,7 +81,7 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
     }
 
     private fun setRetryListener() {
-        binding.buttonRetryCards.setOnClickListener { cardsAdapter.retry() }
+        binding.imageViewRetryCards.setOnClickListener { cardsAdapter.retry() }
     }
 
     private fun setAdapter() {
@@ -101,11 +101,7 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
             val cardsUiState = CardsUiState(loadState)
             recyclerViewCards.visibility = cardsUiState.getListVisibility()
             progressBarCards.visibility = cardsUiState.getProgressBarVisibility()
-            buttonRetryCards.visibility = cardsUiState.getErrorVisibility()
-            tvError.visibility = cardsUiState.getErrorVisibility()
-            context?.let { context ->
-                tvError.text = cardsUiState.getErrorMessage(context)
-            }
+            imageViewRetryCards.visibility = cardsUiState.getErrorVisibility()
         }
     }
 
