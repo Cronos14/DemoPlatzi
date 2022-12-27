@@ -8,11 +8,12 @@ import com.javatar.domain.models.MonsterCard
 import com.javatar.domain.models.SpellCard
 import com.javatar.domain.models.TrapCard
 import com.javatar.domain.repository.DeckRepository
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 class DeckRepositoryImp(
-    private val cardLocalDatasourceFacade: CardLocalDatasourceFacade
+    private val cardLocalDatasourceFacade: CardLocalDatasourceFacade,
+    private val dispatcher: CoroutineDispatcher
 ) : DeckRepository {
 
     override suspend fun saveCard(card: Card): Long {
@@ -25,7 +26,7 @@ class DeckRepositoryImp(
     }
 
     override suspend fun deleteCard(card: Card) {
-        withContext(Dispatchers.IO) {
+        withContext(dispatcher) {
             when (card) {
                 is MonsterCard -> cardLocalDatasourceFacade.monsterCardLocalDatasource.delete(card.toEntity())
                 is SpellCard -> cardLocalDatasourceFacade.spellCardLocalDatasource.delete(card.toEntity())

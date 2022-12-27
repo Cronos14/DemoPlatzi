@@ -16,6 +16,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -26,8 +27,11 @@ object ModuleUseCase {
     }
 
     @Provides
-    fun provideDeckRepository(cardLocalDatasourceFacade: CardLocalDatasourceFacade): DeckRepository {
-        return DeckRepositoryImp(cardLocalDatasourceFacade)
+    fun provideDeckRepository(
+        cardLocalDatasourceFacade: CardLocalDatasourceFacade,
+        @IoDispatcher dispatcher: CoroutineDispatcher
+    ): DeckRepository {
+        return DeckRepositoryImp(cardLocalDatasourceFacade, dispatcher)
     }
 
     @Provides

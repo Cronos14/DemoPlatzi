@@ -48,7 +48,7 @@ val monsterCardComponentFake = MonsterCardComponent(
     2,
     "dark",
     "monster card",
-    "https://www.google.com",
+    "123",
     "https://www.google.com",
     "https://www.google.com",
     "dark",
@@ -71,9 +71,10 @@ val spellCardComponentFake = SpellCardComponent(
     "spell card",
     "description",
     "dark",
+    "123",
     "https://www.google.com",
     "https://www.google.com",
-    "fire",
+    "fire"
 )
 
 val trapCardFake = TrapCard(
@@ -91,6 +92,7 @@ val trapCardComponentFake = TrapCardComponent(
     "trap card",
     "description",
     "dark",
+    "123",
     "https://www.google.com",
-    "https://www.google.com",
+    "https://www.google.com"
 )

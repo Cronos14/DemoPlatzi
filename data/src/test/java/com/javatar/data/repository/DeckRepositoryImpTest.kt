@@ -10,7 +10,7 @@ import com.javatar.data.datasource.local.SpellCardLocalDataSource
 import com.javatar.data.datasource.local.TrapCardLocalDataSource
 import com.javatar.data.repository.utils.mocks.*
 import com.javatar.demoplatzi.utils.CoroutinesTestRule
-import com.javatar.demoplatzi.utils.mocks.*
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Rule
@@ -27,6 +27,8 @@ class DeckRepositoryImpTest {
 
     @get:Rule
     val coroutinesTestRule = CoroutinesTestRule()
+
+    private val testDispatcher = TestCoroutineDispatcher()
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -61,7 +63,7 @@ class DeckRepositoryImpTest {
             spellCardLocalDatasource,
             trapCardLocalDatasource
         )
-        deckRepositoryImp = DeckRepositoryImp(cardLocalDatasourceFacade)
+        deckRepositoryImp = DeckRepositoryImp(cardLocalDatasourceFacade, testDispatcher)
     }
 
     @Test
@@ -147,7 +149,7 @@ class DeckRepositoryImpTest {
 
             val result = deckRepositoryImp.deleteCard(monsterCardFake)
 
-            Mockito.verify(monsterCardLocalDatasource, ).delete(monsterCardEntityFake)
+            Mockito.verify(monsterCardLocalDatasource).delete(monsterCardEntityFake)
             Mockito.verify(spellCardLocalDatasource, never()).delete(spellCardEntityFake)
             Mockito.verify(trapCardLocalDatasource, never()).delete(trapCardEntityFake)
         }
