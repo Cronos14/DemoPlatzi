@@ -1,4 +1,4 @@
-package com.javatar.demoplatzi.deck.viewholder
+package com.javatar.demoplatzi.cardsexplorer.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide

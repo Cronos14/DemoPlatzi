@@ -6,7 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.javatar.demoplatzi.cardsexplorer.models.CardItemUiState
 import com.javatar.demoplatzi.databinding.ItemCardBinding
-import com.javatar.demoplatzi.deck.viewholder.CardViewHolder
+import com.javatar.demoplatzi.cardsexplorer.viewholder.CardViewHolder
 
 class CardsAdapter constructor(
     private val onCardClick: (card: CardItemUiState) -> Unit
