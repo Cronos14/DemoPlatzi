@@ -8,6 +8,8 @@ import com.javatar.domain.models.MonsterCard
 import com.javatar.domain.models.SpellCard
 import com.javatar.domain.models.TrapCard
 import com.javatar.domain.repository.DeckRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class DeckRepositoryImp(
     private val cardLocalDatasourceFacade: CardLocalDatasourceFacade
@@ -23,11 +25,12 @@ class DeckRepositoryImp(
     }
 
     override suspend fun deleteCard(card: Card) {
-        return when (card) {
-            is MonsterCard -> cardLocalDatasourceFacade.monsterCardLocalDatasource.delete(card.toEntity())
-            is SpellCard -> cardLocalDatasourceFacade.spellCardLocalDatasource.delete(card.toEntity())
-            is TrapCard -> cardLocalDatasourceFacade.trapCardLocalDatasource.delete(card.toEntity())
-            else -> return
+        withContext(Dispatchers.IO) {
+            when (card) {
+                is MonsterCard -> cardLocalDatasourceFacade.monsterCardLocalDatasource.delete(card.toEntity())
+                is SpellCard -> cardLocalDatasourceFacade.spellCardLocalDatasource.delete(card.toEntity())
+                is TrapCard -> cardLocalDatasourceFacade.trapCardLocalDatasource.delete(card.toEntity())
+            }
         }
     }
 

@@ -4,8 +4,14 @@ import com.javatar.domain.models.SpellCard
 import com.javatar.domain.value
 
 data class SpellCardResponse(
-    val archetype: String?,
-) : CardResponse()
+    override val id: String?,
+    override val name: String?,
+    override val type: String?,
+    override val desc: String?,
+    override val race: String?,
+    override val images: List<ImageResponse>?,
+    override val archetype: String?,
+) : CardResponse(id, name, type, desc, race, images)
 
 fun SpellCardResponse.toSpellCard() = SpellCard(
     id = id.value(),

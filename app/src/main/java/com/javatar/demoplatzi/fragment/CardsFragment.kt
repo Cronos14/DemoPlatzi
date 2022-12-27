@@ -73,7 +73,7 @@ class CardsFragment : Fragment(R.layout.fragment_cards) {
         }
         cardsAdapter = CardsAdapter {
             onCardDataListener?.getData()?.card = it.card
-            cardNavController.navigate(R.id.action_cardsFragment_to_cardDetailFragment)
+            cardNavController.navigate(R.id.action_cardsFragment_to_saveCardDetailFragment)
         }
         setRetryListener()
         setAdapter()

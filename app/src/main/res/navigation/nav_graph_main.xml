@@ -11,8 +11,8 @@
         android:label="fragment_cards"
         tools:layout="@layout/fragment_cards">
         <action
-            android:id="@+id/action_cardsFragment_to_cardDetailFragment"
-            app:destination="@id/cardDetailFragment" />
+            android:id="@+id/action_cardsFragment_to_saveCardDetailFragment"
+            app:destination="@id/saveCardDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/deckFragment"
@@ -23,11 +23,11 @@
             app:destination="@id/deleteCardDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/cardDetailFragment"
-        android:name="com.javatar.demoplatzi.fragment.CardDetailFragment"
-        android:label="CardDetailFragment" />
-    <fragment
         android:id="@+id/deleteCardDetailFragment"
         android:name="com.javatar.demoplatzi.fragment.DeleteCardDetailFragment"
         android:label="DeleteCardDetailFragment" />
+    <fragment
+        android:id="@+id/saveCardDetailFragment"
+        android:name="com.javatar.demoplatzi.fragment.SaveCardDetailFragment"
+        android:label="SaveCardDetailFragment" />
 </navigation>

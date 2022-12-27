@@ -5,14 +5,20 @@ import com.javatar.domain.models.Card
 import com.javatar.domain.models.Image
 import com.javatar.domain.value
 
-abstract class CardResponse {
-    val id: String? = null
-    val name: String? = null
-    val type: String? = null
-    val desc: String? = null
-    val race: String? = null
+open class CardResponse(
+    open val id: String?,
+    open val name: String?,
+    open val type: String?,
+    open val desc: String?,
+    open val race: String?,
     @SerializedName("card_images")
-    val images: List<ImageResponse>? = null
+    open val images: List<ImageResponse>?
+) {
+    open val archetype: String? = null
+    open val atk: Int? = null
+    open val def: Int? = null
+    open val level: Int? = null
+    open val attribute: String? = null
 }
 
 data class ImageResponse(
@@ -36,4 +42,37 @@ fun CardResponse.toCard() = Card(
     desc = desc.value(),
     race = race.value(),
     images = images?.map { it.toImage() } ?: emptyList()
+)
+
+fun CardResponse.toMonsterResponse() = MonsterCardResponse(
+    id = id,
+    name = name,
+    type = type,
+    desc = desc,
+    race = race,
+    images = images,
+    archetype = archetype,
+    atk = atk,
+    def = def,
+    level = level,
+    attribute = attribute
+)
+
+fun CardResponse.toSpellResponse() = SpellCardResponse(
+    id = id,
+    name = name,
+    type = type,
+    desc = desc,
+    race = race,
+    images = images,
+    archetype = archetype,
+)
+
+fun CardResponse.toTrapResponse() = TrapCardResponse(
+    id = id,
+    name = name,
+    type = type,
+    desc = desc,
+    race = race,
+    images = images,
 )

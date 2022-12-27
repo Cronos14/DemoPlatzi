@@ -18,13 +18,13 @@ import com.javatar.demoplatzi.viewmodel.CardDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
+open class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
 
-    private val viewModel: CardDetailViewModel by viewModels()
     private lateinit var binding: FragmentCardDetailBinding
-    private var onCardDataListener: OnCardDataListener? = null
     private var onToolbarActions: OnToolbarActions? = null
     private var onBottomNavigationActions: OnBottomNavigationActions? = null
+    protected var onCardDataListener: OnCardDataListener? = null
+    protected val viewModel: CardDetailViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -62,35 +62,6 @@ class CardDetailFragment : Fragment(R.layout.fragment_card_detail) {
         }
         onCardDataListener?.let { data ->
             showView()
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_detail_card, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_save -> {
-                onCardDataListener?.let { data ->
-                    data.getData().card?.let { card ->
-                        viewModel.saveCard(card)
-                        findNavController().navigateUp()
-                        Toast.makeText(context, resources.getText(R.string.message_add_card), Toast.LENGTH_SHORT).show()
-                    }
-                }
-                true
-            }
-            R.id.action_delete -> {
-                onCardDataListener?.let { data ->
-                    data.getData().card?.let { card ->
-                        viewModel.deleteCard(card)
-                        Toast.makeText(context, resources.getText(R.string.message_delete_card), Toast.LENGTH_SHORT).show()
-                    }
-                }
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
         }
     }
 

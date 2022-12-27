@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.javatar.domain.models.Card
 import com.javatar.domain.usecase.DeckUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,7 +20,7 @@ class CardDetailViewModel @Inject constructor(
     }
 
     fun deleteCard(card: Card) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             deckUseCase.deleteCard(card)
         }
     }

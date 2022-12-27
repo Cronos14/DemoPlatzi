@@ -5,10 +5,7 @@ import com.javatar.demoplatzi.component.Component
 import com.javatar.demoplatzi.component.MonsterCardComponent
 import com.javatar.demoplatzi.component.SpellCardComponent
 import com.javatar.demoplatzi.component.TrapCardComponent
-import com.javatar.demoplatzi.viewholder.ComponentViewHolder
-import com.javatar.demoplatzi.viewholder.DeckHolderListener
-import com.javatar.demoplatzi.viewholder.EmptyView
-import com.javatar.demoplatzi.viewholder.MonsterCardView
+import com.javatar.demoplatzi.viewholder.*
 
 class DeckViewHolderFactory : ComponentViewHolderFactory<DeckHolderListener> {
     override fun getViewHolder(
@@ -17,6 +14,8 @@ class DeckViewHolderFactory : ComponentViewHolderFactory<DeckHolderListener> {
     ): ComponentViewHolder<DeckHolderListener> {
         return when (viewType) {
             ItemType.MONSTER_CARD.type -> MonsterCardView().getViewHolder(parent)
+            ItemType.SPELL_CARD.type -> SpellCardView().getViewHolder(parent)
+            ItemType.TRAP_CARD.type -> TrapCardView().getViewHolder(parent)
             else -> EmptyView().getViewHolder(parent)
         }
     }

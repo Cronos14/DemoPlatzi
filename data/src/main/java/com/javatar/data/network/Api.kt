@@ -8,9 +8,10 @@ import retrofit2.http.Query
 interface Api {
     @GET("api/v7/cardinfo.php")
     suspend fun getCards(
-        @Query("fname") name: String?,
+        @Query("fname") name: String? = "",
         @Query("offset") offset: Int?,
-        @Query("num") num: Int?
+        @Query("num") num: Int?,
+        @Query("type") type: String? = "Effect Monster,Spell card,Trap card",
     ): Response<GeneralResponse<CardResponse>>
 
     @GET("api/v7/cardinfo.php")

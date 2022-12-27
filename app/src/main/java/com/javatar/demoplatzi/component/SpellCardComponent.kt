@@ -1,5 +1,6 @@
 package com.javatar.demoplatzi.component
 
+import com.javatar.domain.models.Image
 import com.javatar.domain.models.SpellCard
 import com.javatar.domain.value
 
@@ -9,6 +10,7 @@ class SpellCardComponent(
     val type: String,
     val desc: String,
     val race: String,
+    val idUrl: String,
     val url: String,
     val urlSmall: String,
     val archetype: String,
@@ -20,7 +22,18 @@ fun SpellCard.toComponent() = SpellCardComponent(
     type,
     desc,
     race,
+    images.firstOrNull()?.id.value(),
     images.firstOrNull()?.url.value(),
     images.firstOrNull()?.urlSmall.value(),
     archetype
+)
+
+fun SpellCardComponent.toCard() = SpellCard(
+    id = id.value(),
+    name = name.value(),
+    type = type.value(),
+    desc = desc.value(),
+    race = race.value(),
+    images = listOf(Image(idUrl, url, urlSmall)),
+    archetype = archetype.value(),
 )

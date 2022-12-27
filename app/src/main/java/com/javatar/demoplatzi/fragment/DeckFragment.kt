@@ -11,9 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.javatar.demoplatzi.R
 import com.javatar.demoplatzi.adapter.ComponentAdapter
-import com.javatar.demoplatzi.component.Component
-import com.javatar.demoplatzi.component.MonsterCardComponent
-import com.javatar.demoplatzi.component.toCard
+import com.javatar.demoplatzi.component.*
 import com.javatar.demoplatzi.databinding.FragmentDeckBinding
 import com.javatar.demoplatzi.factory.DeckViewHolderFactory
 import com.javatar.demoplatzi.listener.ComponentClickListener
@@ -97,6 +95,18 @@ class DeckFragment : Fragment(R.layout.fragment_deck), ComponentClickListener<De
             is DeckHolderListener.GeneralItemClickListener -> {
                 val component = clicked.component
                 if (component is MonsterCardComponent) {
+                    onCardDataListener?.getData()?.card = component.toCard()
+                    cardNavController.navigate(
+                        R.id.action_deckFragment_to_deleteCardDetailFragment
+                    )
+                }
+                if (component is SpellCardComponent) {
+                    onCardDataListener?.getData()?.card = component.toCard()
+                    cardNavController.navigate(
+                        R.id.action_deckFragment_to_deleteCardDetailFragment
+                    )
+                }
+                if (component is TrapCardComponent) {
                     onCardDataListener?.getData()?.card = component.toCard()
                     cardNavController.navigate(
                         R.id.action_deckFragment_to_deleteCardDetailFragment

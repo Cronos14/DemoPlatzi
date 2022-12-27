@@ -2,8 +2,7 @@ package com.javatar.data.pagingdatasource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.javatar.data.datasource.remote.response.toCard
-import com.javatar.data.datasource.remote.response.toMonsterCard
+import com.javatar.data.datasource.remote.response.*
 import com.javatar.data.network.Api
 import com.javatar.domain.models.Card
 
@@ -21,9 +20,9 @@ class CardPagingDataSource(
         val page = params.key ?: STARTING_PAGE_INDEX
         return try {
             val results = params.loadSize
-            val response = api.getMonsterCards( offset = page * results, num = results)
+            val response = api.getCards(offset = page * results, num = results)
             val result = response.body()?.data?.map {
-                it.toMonsterCard()
+                getCardType(it)
             } ?: emptyList()
             LoadResult.Page(
                 data = result,
@@ -35,7 +34,26 @@ class CardPagingDataSource(
         }
     }
 
+    private fun getCardType(cardResponse: CardResponse) = when {
+        cardResponse.type?.contains(
+            TYPE_MONSTER,
+            true
+        ) == true -> cardResponse.toMonsterResponse().toMonsterCard()
+        cardResponse.type.equals(
+            TYPE_SPELL,
+            true
+        ) -> cardResponse.toSpellResponse().toSpellCard()
+        cardResponse.type.equals(
+            TYPE_TRAP,
+            true
+        ) -> cardResponse.toTrapResponse().toTrapCard()
+        else -> cardResponse.toCard()
+    }
+
     companion object {
         private const val STARTING_PAGE_INDEX = 1
+        const val TYPE_MONSTER = "Monster"
+        const val TYPE_SPELL = "Spell Card"
+        const val TYPE_TRAP = "Trap Card"
     }
 }
