@@ -17,3 +17,6 @@ https://user-images.githubusercontent.com/4683744/209608170-ea1aa449-c3a2-44ef-8
 * [Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview?hl=es-419)
 * [Junit](https://junit.org/junit4/)
 * [Mockito](https://site.mockito.org/)
+
+## API
+[YuGiOh Pro](https://ygoprodeck.com/api-guide/)
