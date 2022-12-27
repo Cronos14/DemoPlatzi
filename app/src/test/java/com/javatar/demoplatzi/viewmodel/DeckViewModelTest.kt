@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import com.javatar.demoplatzi.component.*
 import com.javatar.demoplatzi.utils.CoroutinesTestRule
 import com.javatar.demoplatzi.utils.mocks.*
+import com.javatar.domain.common.Either
 import com.javatar.domain.models.MonsterCard
 import com.javatar.domain.usecase.DeckUseCase
 import kotlinx.coroutines.test.runBlockingTest
@@ -53,7 +54,7 @@ class DeckViewModelTest {
 
         coroutinesTestRule.testDispatcher.runBlockingTest {
 
-            Mockito.`when`(deckUseCase.getCards()).thenReturn(listOf(monsterCardFake))
+            Mockito.`when`(deckUseCase.getCards()).thenReturn(Either.Right(listOf(monsterCardFake)))
 
             viewModel.deck.observeForever(observer)
             viewModel.getDeck()
@@ -77,7 +78,7 @@ class DeckViewModelTest {
 
         coroutinesTestRule.testDispatcher.runBlockingTest {
 
-            Mockito.`when`(deckUseCase.getCards()).thenReturn(listOf(spellCardFake))
+            Mockito.`when`(deckUseCase.getCards()).thenReturn(Either.Right(listOf(spellCardFake)))
 
             viewModel.deck.observeForever(observer)
             viewModel.getDeck()
@@ -101,7 +102,7 @@ class DeckViewModelTest {
 
         coroutinesTestRule.testDispatcher.runBlockingTest {
 
-            Mockito.`when`(deckUseCase.getCards()).thenReturn(listOf(trapCardFake))
+            Mockito.`when`(deckUseCase.getCards()).thenReturn(Either.Right(listOf(trapCardFake)))
 
             viewModel.deck.observeForever(observer)
             viewModel.getDeck()
@@ -125,7 +126,7 @@ class DeckViewModelTest {
 
         coroutinesTestRule.testDispatcher.runBlockingTest {
 
-            Mockito.`when`(deckUseCase.getCards()).thenReturn(listOf(cardFake))
+            Mockito.`when`(deckUseCase.getCards()).thenReturn(Either.Right(listOf(cardFake)))
 
             viewModel.deck.observeForever(observer)
             viewModel.getDeck()
