@@ -6,7 +6,7 @@ https://user-images.githubusercontent.com/4683744/209608170-ea1aa449-c3a2-44ef-8
 
 
 
-## Architecture
+# Architecture
 
 * Dependency Injection with [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 * [Jetpack Navigation](https://developer.android.com/jetpack/compose/navigation)
@@ -18,5 +18,13 @@ https://user-images.githubusercontent.com/4683744/209608170-ea1aa449-c3a2-44ef-8
 * [Junit](https://junit.org/junit4/)
 * [Mockito](https://site.mockito.org/)
 
-## API
+### MVVM + Clean Architecture
+![mvvm_plus_clean drawio](https://user-images.githubusercontent.com/4683744/209625537-02ad5385-a33a-4941-803c-464d10ca4ebc.png)
+
+
+### API
 [YuGiOh Pro](https://ygoprodeck.com/api-guide/)
+
+### Component Adapter
+#### The adapter component uses the Adapter and Factory patterns, it is used to create scalable dynamic ViewHolders
+![ComponentAdapter drawio](https://user-images.githubusercontent.com/4683744/209620137-ace2f88c-75be-4efe-9a6c-cf612641b607.png)
