@@ -12,7 +12,7 @@ import com.javatar.domain.models.Card
 import com.javatar.domain.models.MonsterCard
 import com.javatar.domain.models.SpellCard
 import com.javatar.domain.models.TrapCard
-import com.javatar.domain.repository.CardRepository
+import com.javatar.domain.cardexplorer.repository.CardRepository
 import kotlinx.coroutines.flow.Flow
 
 class CardRepositoryImp(

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/cardsFragment"
-        android:name="com.javatar.demoplatzi.fragment.CardsFragment"
+        android:name="com.javatar.demoplatzi.cardsexplorer.fragment.CardsFragment"
         android:label="fragment_cards"
         tools:layout="@layout/fragment_cards">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/deckFragment"
-        android:name="com.javatar.demoplatzi.fragment.DeckFragment"
+        android:name="com.javatar.demoplatzi.deck.fragment.DeckFragment"
         android:label="DeckFragment" >
         <action
             android:id="@+id/action_deckFragment_to_deleteCardDetailFragment"
@@ -24,10 +24,10 @@
     </fragment>
     <fragment
         android:id="@+id/deleteCardDetailFragment"
-        android:name="com.javatar.demoplatzi.fragment.DeleteCardDetailFragment"
+        android:name="com.javatar.demoplatzi.carddetail.fragment.DeleteCardDetailFragment"
         android:label="DeleteCardDetailFragment" />
     <fragment
         android:id="@+id/saveCardDetailFragment"
-        android:name="com.javatar.demoplatzi.fragment.SaveCardDetailFragment"
+        android:name="com.javatar.demoplatzi.carddetail.fragment.SaveCardDetailFragment"
         android:label="SaveCardDetailFragment" />
 </navigation>

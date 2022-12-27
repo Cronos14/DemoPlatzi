@@ -10,8 +10,8 @@ import com.javatar.data.datasource.local.SpellCardLocalDataSource
 import com.javatar.data.datasource.local.TrapCardLocalDataSource
 import com.javatar.data.repository.CardRepositoryImp
 import com.javatar.data.repository.DeckRepositoryImp
-import com.javatar.domain.repository.CardRepository
-import com.javatar.domain.repository.DeckRepository
+import com.javatar.domain.cardexplorer.repository.CardRepository
+import com.javatar.domain.deck.repository.DeckRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

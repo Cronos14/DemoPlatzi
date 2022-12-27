@@ -1,11 +1,11 @@
 package com.javatar.di
 
-import com.javatar.domain.repository.CardRepository
-import com.javatar.domain.repository.DeckRepository
-import com.javatar.domain.usecase.CardUseCase
-import com.javatar.domain.usecase.CardUseCaseImp
-import com.javatar.domain.usecase.DeckUseCase
-import com.javatar.domain.usecase.DeckUseCaseImp
+import com.javatar.domain.cardexplorer.repository.CardRepository
+import com.javatar.domain.deck.repository.DeckRepository
+import com.javatar.domain.cardexplorer.usecase.CardUseCase
+import com.javatar.domain.cardexplorer.usecase.CardUseCaseImp
+import com.javatar.domain.deck.usecase.DeckUseCase
+import com.javatar.domain.deck.usecase.DeckUseCaseImp
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

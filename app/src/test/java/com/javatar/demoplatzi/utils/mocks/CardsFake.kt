@@ -1,9 +1,9 @@
 package com.javatar.demoplatzi.utils.mocks
 
-import com.javatar.demoplatzi.component.CardComponent
-import com.javatar.demoplatzi.component.MonsterCardComponent
-import com.javatar.demoplatzi.component.SpellCardComponent
-import com.javatar.demoplatzi.component.TrapCardComponent
+import com.javatar.demoplatzi.common.component.CardComponent
+import com.javatar.demoplatzi.common.component.MonsterCardComponent
+import com.javatar.demoplatzi.common.component.SpellCardComponent
+import com.javatar.demoplatzi.common.component.TrapCardComponent
 import com.javatar.domain.models.*
 
 val cardFake = Card(

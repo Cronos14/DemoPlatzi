@@ -2,12 +2,13 @@ package com.javatar.demoplatzi.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.javatar.demoplatzi.common.component.*
 import com.javatar.demoplatzi.component.*
 import com.javatar.demoplatzi.utils.CoroutinesTestRule
 import com.javatar.demoplatzi.utils.mocks.*
 import com.javatar.domain.common.Either
 import com.javatar.domain.models.MonsterCard
-import com.javatar.domain.usecase.DeckUseCase
+import com.javatar.domain.deck.usecase.DeckUseCase
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat
