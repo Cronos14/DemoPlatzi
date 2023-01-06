@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), OnToolbarActions, OnBottomNavigationAc
     }
 
     override fun hideBottomNavigation() {
-        binding.bottomNavView.visibility = View.GONE
+        binding.bottomNavView.visibility = View.INVISIBLE
     }
 
     override fun showBottomNavigation() {

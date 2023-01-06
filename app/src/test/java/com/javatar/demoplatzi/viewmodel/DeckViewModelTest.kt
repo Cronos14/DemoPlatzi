@@ -32,8 +32,6 @@ class DeckViewModelTest {
     @Mock
     private lateinit var deckUseCase: DeckUseCase
 
-    @Mock
-    private lateinit var monsterCard: MonsterCard
 
     @Mock
     private lateinit var observer: Observer<List<Component>>
@@ -91,10 +89,7 @@ class DeckViewModelTest {
             val values: MutableList<List<Component>> = argumentCaptorComponents.allValues
 
             assertThat(spellCardComponentFake, instanceOf(SpellCardComponent::class.java))
-            Assert.assertEquals(
-                spellCardComponentFake.type,
-                (values[0][0] as SpellCardComponent).type
-            )
+            Assert.assertEquals(spellCardComponentFake.type, (values[0][0] as SpellCardComponent).type)
         }
     }
 
@@ -124,6 +119,27 @@ class DeckViewModelTest {
 
     @Test
     fun getDeck_getCard_success() {
+
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+
+            Mockito.`when`(deckUseCase.getCards()).thenReturn(Either.Right(listOf(cardFake)))
+
+            viewModel.deck.observeForever(observer)
+            viewModel.getDeck()
+
+            Mockito.verify(observer).onChanged(argumentCaptorComponents.capture())
+
+            Mockito.verify(deckUseCase).getCards()
+
+            val values: MutableList<List<Component>> = argumentCaptorComponents.allValues
+
+            assertThat(cardComponentFake, instanceOf(CardComponent::class.java))
+            Assert.assertEquals(cardComponentFake.type, (values[0][0] as CardComponent).type)
+        }
+    }
+
+    @Test
+    fun getDeck_getCard_success_backup() {
 
         coroutinesTestRule.testDispatcher.runBlockingTest {
 
