@@ -32,8 +32,6 @@ class DeckViewModelTest {
     @Mock
     private lateinit var deckUseCase: DeckUseCase
 
-    @Mock
-    private lateinit var monsterCard: MonsterCard
 
     @Mock
     private lateinit var observer: Observer<List<Component>>
