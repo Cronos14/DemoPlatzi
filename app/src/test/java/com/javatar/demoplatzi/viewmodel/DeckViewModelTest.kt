@@ -91,10 +91,7 @@ class DeckViewModelTest {
             val values: MutableList<List<Component>> = argumentCaptorComponents.allValues
 
             assertThat(spellCardComponentFake, instanceOf(SpellCardComponent::class.java))
-            Assert.assertEquals(
-                spellCardComponentFake.type,
-                (values[0][0] as SpellCardComponent).type
-            )
+            Assert.assertEquals(spellCardComponentFake.type, (values[0][0] as SpellCardComponent).type)
         }
     }
 
