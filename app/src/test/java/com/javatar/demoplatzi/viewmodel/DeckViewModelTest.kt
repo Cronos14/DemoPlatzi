@@ -142,4 +142,25 @@ class DeckViewModelTest {
             Assert.assertEquals(cardComponentFake.type, (values[0][0] as CardComponent).type)
         }
     }
+
+    @Test
+    fun getDeck_getCard_success_backup() {
+
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+
+            Mockito.`when`(deckUseCase.getCards()).thenReturn(Either.Right(listOf(cardFake)))
+
+            viewModel.deck.observeForever(observer)
+            viewModel.getDeck()
+
+            Mockito.verify(observer).onChanged(argumentCaptorComponents.capture())
+
+            Mockito.verify(deckUseCase).getCards()
+
+            val values: MutableList<List<Component>> = argumentCaptorComponents.allValues
+
+            assertThat(cardComponentFake, instanceOf(CardComponent::class.java))
+            Assert.assertEquals(cardComponentFake.type, (values[0][0] as CardComponent).type)
+        }
+    }
 }
