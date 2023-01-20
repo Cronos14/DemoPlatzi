@@ -14,12 +14,13 @@ import com.javatar.demoplatzi.R
 import com.javatar.demoplatzi.common.adapter.ComponentAdapter
 import com.javatar.demoplatzi.common.component.*
 import com.javatar.demoplatzi.common.factory.DeckViewHolderFactory
+import com.javatar.demoplatzi.common.factory.ViewHolderFactory
 import com.javatar.demoplatzi.common.listener.ComponentClickListener
 import com.javatar.demoplatzi.common.listener.OnBottomNavigationActions
 import com.javatar.demoplatzi.common.listener.OnCardDataListener
 import com.javatar.demoplatzi.common.listener.OnToolbarActions
 import com.javatar.demoplatzi.databinding.FragmentDeckBinding
-import com.javatar.demoplatzi.deck.viewholder.DeckHolderListener
+import com.javatar.demoplatzi.deck.viewholder.*
 import com.javatar.demoplatzi.deck.viewmodel.DeckViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -66,9 +67,32 @@ class DeckFragment : Fragment(R.layout.fragment_deck), ComponentClickListener<De
         onBottomNavigationActions?.apply {
             showBottomNavigation()
         }
+
+//        val viewHolders: Map<Int, Pair<Class<out Component>, ViewHolderWrapper<DeckHolderListener, out Component>>> = mapOf(
+//            Pair(0, Pair(MonsterCardComponent::class.java, MonsterCardView())),
+//            Pair(1, Pair(SpellCardComponent::class.java, SpellCardView())),
+//            Pair(2, Pair(TrapCardComponent::class.java, TrapCardView())),
+//        )
+
+//        val viewHolders2 = listOf(
+//            Pair(MonsterCardComponent::class.java, MonsterCardView()),
+//            Pair(SpellCardComponent::class.java, SpellCardView())
+//        )
+
+        val viewHolders2: List<MonsterCardView> = listOf(
+            MonsterCardView(),
+//            SpellCardView()
+        )
+
         with(binding) {
             recyclerViewDeck.adapter = ComponentAdapter(
-                DeckViewHolderFactory(),
+//                DeckViewHolderFactory(),
+                ViewHolderFactory(
+//                    viewHolders,
+                    MonsterCardView(),
+                    SpellCardView(),
+//                    EmptyView()
+                ),
                 components,
                 this@DeckFragment
             )

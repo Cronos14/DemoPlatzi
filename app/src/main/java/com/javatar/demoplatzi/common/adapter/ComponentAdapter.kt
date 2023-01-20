@@ -8,18 +8,18 @@ import com.javatar.demoplatzi.common.listener.ComponentClickListener
 import com.javatar.demoplatzi.common.listener.ComponentListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
 
-open class ComponentAdapter<T : ComponentListener>(
-    private val componentViewHolderFactory: ComponentViewHolderFactory<T>,
-    val components: ArrayList<Component>,
+open class ComponentAdapter<T : ComponentListener, C: Component>(
+    private val componentViewHolderFactory: ComponentViewHolderFactory<T, C>,
+    val components: ArrayList<C>,
     private val componentClickListener: ComponentClickListener<T>? = null
 ) :
-    RecyclerView.Adapter<ComponentViewHolder<T>>() {
+    RecyclerView.Adapter<ComponentViewHolder<T, C>>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComponentViewHolder<T> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComponentViewHolder<T, C> {
         return componentViewHolderFactory.getViewHolder(parent, viewType)
     }
 
-    override fun onBindViewHolder(holder: ComponentViewHolder<T>, position: Int) {
+    override fun onBindViewHolder(holder: ComponentViewHolder<T, C>, position: Int) {
         return holder.bind(components[position], componentClickListener)
     }
 

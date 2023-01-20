@@ -11,27 +11,25 @@ import com.javatar.demoplatzi.databinding.ItemTrapCardBinding
 import com.javatar.demoplatzi.common.listener.ComponentClickListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
 
-class TrapCardView {
+class TrapCardView : ViewHolderWrapper<DeckHolderListener, TrapCardComponent>{
 
     lateinit var binding: ItemTrapCardBinding
 
-    fun getViewHolder(root: ViewGroup): ComponentViewHolder<DeckHolderListener> {
+    override fun getViewHolder(root: ViewGroup): ComponentViewHolder<DeckHolderListener, TrapCardComponent> {
         val layoutInflater = LayoutInflater.from(root.context)
         binding = ItemTrapCardBinding.inflate(layoutInflater, root, false)
         return ViewHolder(binding.root)
     }
 
     inner class ViewHolder(itemView: View) :
-        ComponentViewHolder<DeckHolderListener>(itemView) {
+        ComponentViewHolder<DeckHolderListener, TrapCardComponent>(itemView) {
 
         override fun bind(
-            component: Component,
+            component: TrapCardComponent,
             componentClickListener: ComponentClickListener<DeckHolderListener>?,
         ) {
-            val cardComponent = component as? TrapCardComponent
-
             with(binding) {
-                cardComponent?.let { card ->
+                component?.let { card ->
                     Glide.with(imageViewCard)
                         .load(card.urlSmall)
                         .diskCacheStrategy(DiskCacheStrategy.DATA)

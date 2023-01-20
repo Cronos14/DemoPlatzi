@@ -7,31 +7,30 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.javatar.demoplatzi.common.component.Component
 import com.javatar.demoplatzi.common.component.SpellCardComponent
+import com.javatar.demoplatzi.common.component.TrapCardComponent
 import com.javatar.demoplatzi.databinding.ItemSpellCardBinding
 import com.javatar.demoplatzi.common.listener.ComponentClickListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
 
-class SpellCardView {
+class SpellCardView : ViewHolderWrapper<DeckHolderListener, SpellCardComponent>{
 
     lateinit var binding: ItemSpellCardBinding
 
-    fun getViewHolder(root: ViewGroup): ComponentViewHolder<DeckHolderListener> {
+    override fun getViewHolder(root: ViewGroup): ComponentViewHolder<DeckHolderListener, SpellCardComponent> {
         val layoutInflater = LayoutInflater.from(root.context)
         binding = ItemSpellCardBinding.inflate(layoutInflater, root, false)
         return ViewHolder(binding.root)
     }
 
     inner class ViewHolder(itemView: View) :
-        ComponentViewHolder<DeckHolderListener>(itemView) {
+        ComponentViewHolder<DeckHolderListener, SpellCardComponent>(itemView) {
 
         override fun bind(
-            component: Component,
+            component: SpellCardComponent,
             componentClickListener: ComponentClickListener<DeckHolderListener>?,
         ) {
-            val cardComponent = component as? SpellCardComponent
-
             with(binding) {
-                cardComponent?.let { card ->
+                component?.let { card ->
                     Glide.with(imageViewCard)
                         .load(card.urlSmall)
                         .diskCacheStrategy(DiskCacheStrategy.DATA)
