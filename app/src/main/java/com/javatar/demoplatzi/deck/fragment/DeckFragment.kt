@@ -68,31 +68,20 @@ class DeckFragment : Fragment(R.layout.fragment_deck), ComponentClickListener<De
             showBottomNavigation()
         }
 
-//        val viewHolders: Map<Int, Pair<Class<out Component>, ViewHolderWrapper<DeckHolderListener, out Component>>> = mapOf(
-//            Pair(0, Pair(MonsterCardComponent::class.java, MonsterCardView())),
-//            Pair(1, Pair(SpellCardComponent::class.java, SpellCardView())),
-//            Pair(2, Pair(TrapCardComponent::class.java, TrapCardView())),
-//        )
 
-//        val viewHolders2 = listOf(
-//            Pair(MonsterCardComponent::class.java, MonsterCardView()),
-//            Pair(SpellCardComponent::class.java, SpellCardView())
-//        )
-
-        val viewHolders2: List<MonsterCardView> = listOf(
-            MonsterCardView(),
-//            SpellCardView()
+        val viewHolders = listOf(
+            Pair(MonsterCardComponent::class.java, MonsterCardView()),
+            Pair(SpellCardComponent::class.java, SpellCardView())
         )
+
 
         with(binding) {
             recyclerViewDeck.adapter = ComponentAdapter(
-//                DeckViewHolderFactory(),
-                ViewHolderFactory(
-//                    viewHolders,
-                    MonsterCardView(),
-                    SpellCardView(),
-//                    EmptyView()
-                ),
+                DeckViewHolderFactory(),
+//                ViewHolderFactory(
+//                    //Error by generic, remember that the generic type is the same of the class
+//                    viewHolders
+//                ),
                 components,
                 this@DeckFragment
             )
