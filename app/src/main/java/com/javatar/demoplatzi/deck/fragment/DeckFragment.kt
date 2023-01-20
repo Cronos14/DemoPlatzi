@@ -79,7 +79,7 @@ class DeckFragment : Fragment(R.layout.fragment_deck), ComponentClickListener<De
             recyclerViewDeck.adapter = ComponentAdapter(
                 DeckViewHolderFactory(),
 //                ViewHolderFactory(
-//                    //Error by generic, remember that the generic type is the same of the class
+//                    //Error by generic, remember that the generic type is the same of the class and only can be one
 //                    viewHolders
 //                ),
                 components,
