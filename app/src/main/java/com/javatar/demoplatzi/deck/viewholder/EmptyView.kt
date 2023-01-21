@@ -8,8 +8,8 @@ import com.javatar.demoplatzi.common.component.Component
 import com.javatar.demoplatzi.common.listener.ComponentClickListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
 
-class EmptyView : ViewHolderWrapper<DeckHolderListener, Component>{
-    override fun getViewHolder(root: ViewGroup): ComponentViewHolder<DeckHolderListener, Component> {
+class EmptyView : ViewHolderWrapper<DeckHolderListener>{
+    override fun getViewHolder(root: ViewGroup): ComponentViewHolder<DeckHolderListener> {
         return EmptyViewHolder(
             LayoutInflater.from(root.context)
                 .inflate(R.layout.item_empty, root, false)
@@ -17,7 +17,7 @@ class EmptyView : ViewHolderWrapper<DeckHolderListener, Component>{
     }
 
     inner class EmptyViewHolder(itemView: View) :
-        ComponentViewHolder<DeckHolderListener, Component>(itemView) {
+        ComponentViewHolder<DeckHolderListener>(itemView) {
         override fun bind(
             component: Component,
             componentClickListener: ComponentClickListener<DeckHolderListener>?

@@ -71,17 +71,18 @@ class DeckFragment : Fragment(R.layout.fragment_deck), ComponentClickListener<De
 
         val viewHolders = listOf(
             Pair(MonsterCardComponent::class.java, MonsterCardView()),
-            Pair(SpellCardComponent::class.java, SpellCardView())
+            Pair(SpellCardComponent::class.java, SpellCardView()),
+            Pair(TrapCardComponent::class.java, TrapCardView())
         )
 
 
         with(binding) {
             recyclerViewDeck.adapter = ComponentAdapter(
-                DeckViewHolderFactory(),
-//                ViewHolderFactory(
-//                    //Error by generic, remember that the generic type is the same of the class and only can be one
-//                    viewHolders
-//                ),
+//                DeckViewHolderFactory(),
+                ViewHolderFactory(
+                    //Error by generic, remember that the generic type is the same of the class and only can be one
+                    viewHolders
+                ),
                 components,
                 this@DeckFragment
             )

@@ -9,14 +9,14 @@ import com.javatar.demoplatzi.common.listener.ComponentListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
 import com.javatar.demoplatzi.deck.viewholder.*
 
-class ViewHolderFactory<T : ComponentListener, C: Component>(
-    private val viewHolders: List<Pair<Class<C>,ViewHolderWrapper<T, C>>>,
-) : ComponentViewHolderFactory<T, C> {
+class ViewHolderFactory<T : ComponentListener>(
+    private val viewHolders: List<Pair<Class<*>,ViewHolderWrapper<T>>>,
+) : ComponentViewHolderFactory<T> {
 
     override fun getViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ComponentViewHolder<T, C> {
+    ): ComponentViewHolder<T> {
 
         viewHolders.forEachIndexed { index, pair ->
             if (index == viewType) {
@@ -28,7 +28,7 @@ class ViewHolderFactory<T : ComponentListener, C: Component>(
         return viewHolders.first().second.getViewHolder(parent)
     }
 
-    override fun getViewType(component: C): Int {
+    override fun getViewType(component: Component): Int {
         viewHolders.forEachIndexed { index, pair ->
             if (component.javaClass.name == pair.first.name) {
                 return index

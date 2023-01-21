@@ -5,7 +5,7 @@ import com.javatar.demoplatzi.common.component.Component
 import com.javatar.demoplatzi.common.listener.ComponentListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
 
-interface ComponentViewHolderFactory<T : ComponentListener, C: Component> {
-    fun getViewHolder(parent: ViewGroup, viewType: Int): ComponentViewHolder<T, C>
-    fun getViewType(component: C): Int
+interface ComponentViewHolderFactory<T : ComponentListener> {
+    fun getViewHolder(parent: ViewGroup, viewType: Int): ComponentViewHolder<T>
+    fun getViewType(component: Component): Int
 }

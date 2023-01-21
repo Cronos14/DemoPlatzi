@@ -5,31 +5,33 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.javatar.demoplatzi.common.component.Component
 import com.javatar.demoplatzi.common.component.MonsterCardComponent
 import com.javatar.demoplatzi.common.listener.ComponentClickListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
 import com.javatar.demoplatzi.databinding.ItemMonsterCardBinding
 
-class MonsterCardView : ViewHolderWrapper<DeckHolderListener, MonsterCardComponent> {
+class MonsterCardView : ViewHolderWrapper<DeckHolderListener> {
 
     lateinit var binding: ItemMonsterCardBinding
 
-    override fun getViewHolder(root: ViewGroup): ComponentViewHolder<DeckHolderListener, MonsterCardComponent> {
+    override fun getViewHolder(root: ViewGroup): ComponentViewHolder<DeckHolderListener> {
         val layoutInflater = LayoutInflater.from(root.context)
         binding = ItemMonsterCardBinding.inflate(layoutInflater, root, false)
         return ViewHolder(binding.root)
     }
 
     inner class ViewHolder(itemView: View) :
-        ComponentViewHolder<DeckHolderListener, MonsterCardComponent>(itemView) {
+        ComponentViewHolder<DeckHolderListener>(itemView) {
 
         override fun bind(
-            component: MonsterCardComponent,
+            component: Component,
             componentClickListener: ComponentClickListener<DeckHolderListener>?,
         ) {
 
+            val card = component as? MonsterCardComponent
             with(binding) {
-                component.let { card ->
+                card?.let { card ->
                     Glide.with(imageViewCard)
                         .load(card.urlSmall)
                         .diskCacheStrategy(DiskCacheStrategy.DATA)

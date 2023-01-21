@@ -12,25 +12,26 @@ import com.javatar.demoplatzi.databinding.ItemSpellCardBinding
 import com.javatar.demoplatzi.common.listener.ComponentClickListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
 
-class SpellCardView : ViewHolderWrapper<DeckHolderListener, SpellCardComponent>{
+class SpellCardView : ViewHolderWrapper<DeckHolderListener>{
 
     lateinit var binding: ItemSpellCardBinding
 
-    override fun getViewHolder(root: ViewGroup): ComponentViewHolder<DeckHolderListener, SpellCardComponent> {
+    override fun getViewHolder(root: ViewGroup): ComponentViewHolder<DeckHolderListener> {
         val layoutInflater = LayoutInflater.from(root.context)
         binding = ItemSpellCardBinding.inflate(layoutInflater, root, false)
         return ViewHolder(binding.root)
     }
 
     inner class ViewHolder(itemView: View) :
-        ComponentViewHolder<DeckHolderListener, SpellCardComponent>(itemView) {
+        ComponentViewHolder<DeckHolderListener,>(itemView) {
 
         override fun bind(
-            component: SpellCardComponent,
+            component: Component,
             componentClickListener: ComponentClickListener<DeckHolderListener>?,
         ) {
+            val card = component as? SpellCardComponent
             with(binding) {
-                component?.let { card ->
+                card?.let { card ->
                     Glide.with(imageViewCard)
                         .load(card.urlSmall)
                         .diskCacheStrategy(DiskCacheStrategy.DATA)
