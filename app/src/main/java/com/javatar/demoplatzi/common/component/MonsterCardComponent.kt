@@ -1,5 +1,7 @@
 package com.javatar.demoplatzi.common.component
 
+import com.javatar.demoplatzi.common.factory.DeckItemType
+import com.javatar.demoplatzi.common.factory.DeckViewHolderFactory
 import com.javatar.domain.models.Image
 import com.javatar.domain.models.MonsterCard
 import com.javatar.domain.value
@@ -18,7 +20,11 @@ class MonsterCardComponent(
     val urlSmall: String,
     val race: String,
     val archetype: String,
-) : Component
+) : Component {
+    override fun type(): Int {
+        return DeckItemType.MONSTER_CARD.type
+    }
+}
 
 fun MonsterCard.toComponent() = MonsterCardComponent(
     id = id,

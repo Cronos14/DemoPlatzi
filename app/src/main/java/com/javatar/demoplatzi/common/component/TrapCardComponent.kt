@@ -1,5 +1,7 @@
 package com.javatar.demoplatzi.common.component
 
+import com.javatar.demoplatzi.common.factory.DeckItemType
+import com.javatar.demoplatzi.common.factory.DeckViewHolderFactory
 import com.javatar.domain.models.Image
 import com.javatar.domain.models.TrapCard
 import com.javatar.domain.value
@@ -13,7 +15,11 @@ class TrapCardComponent(
     val idUrl: String,
     val url: String,
     val urlSmall: String,
-) : Component
+) : Component {
+    override fun type(): Int {
+        return DeckItemType.TRAP_CARD.type
+    }
+}
 
 fun TrapCard.toComponent() = TrapCardComponent(
     id,

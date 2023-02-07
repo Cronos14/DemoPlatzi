@@ -13,12 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.javatar.demoplatzi.R
 import com.javatar.demoplatzi.common.adapter.ComponentAdapter
 import com.javatar.demoplatzi.common.component.*
+import com.javatar.demoplatzi.common.factory.DeckItemType
 import com.javatar.demoplatzi.common.factory.DeckViewHolderFactory
 import com.javatar.demoplatzi.common.factory.ViewHolderFactory
-import com.javatar.demoplatzi.common.listener.ComponentClickListener
-import com.javatar.demoplatzi.common.listener.OnBottomNavigationActions
-import com.javatar.demoplatzi.common.listener.OnCardDataListener
-import com.javatar.demoplatzi.common.listener.OnToolbarActions
+import com.javatar.demoplatzi.common.factory.ViewHolderScalableFactory
+import com.javatar.demoplatzi.common.listener.*
 import com.javatar.demoplatzi.databinding.FragmentDeckBinding
 import com.javatar.demoplatzi.deck.viewholder.*
 import com.javatar.demoplatzi.deck.viewmodel.DeckViewModel
@@ -75,14 +74,22 @@ class DeckFragment : Fragment(R.layout.fragment_deck), ComponentClickListener<De
             Pair(TrapCardComponent::class.java, TrapCardView())
         )
 
+        val viewHoldersScalable = linkedMapOf(
+            Pair(DeckItemType.MONSTER_CARD.type, MonsterCardView()),
+            Pair(DeckItemType.SPELL_CARD.type, SpellCardView()),
+            Pair(DeckItemType.TRAP_CARD.type, TrapCardView()),
+        )
 
         with(binding) {
             recyclerViewDeck.adapter = ComponentAdapter(
-//                DeckViewHolderFactory(),
-                ViewHolderFactory(
-                    //Error by generic, remember that the generic type is the same of the class and only can be one
-                    viewHolders
-                ),
+                DeckViewHolderFactory(),
+//                ViewHolderFactory(
+//                    //Error by generic, remember that the generic type is the same of the class and only can be one
+//                    viewHolders
+//                ),
+//                ViewHolderScalableFactory(
+//                    viewHoldersScalable
+//                ),
                 components,
                 this@DeckFragment
             )
@@ -121,28 +128,16 @@ class DeckFragment : Fragment(R.layout.fragment_deck), ComponentClickListener<De
     }
 
     override fun onComponentClicked(clicked: DeckHolderListener) {
-        when (clicked) {
-            is DeckHolderListener.GeneralItemClickListener -> {
-                val component = clicked.component
-                if (component is MonsterCardComponent) {
-                    onCardDataListener?.getData()?.card = component.toCard()
-                    cardNavController.navigate(
-                        R.id.action_deckFragment_to_deleteCardDetailFragment
-                    )
-                }
-                if (component is SpellCardComponent) {
-                    onCardDataListener?.getData()?.card = component.toCard()
-                    cardNavController.navigate(
-                        R.id.action_deckFragment_to_deleteCardDetailFragment
-                    )
-                }
-                if (component is TrapCardComponent) {
-                    onCardDataListener?.getData()?.card = component.toCard()
-                    cardNavController.navigate(
-                        R.id.action_deckFragment_to_deleteCardDetailFragment
-                    )
-                }
-            }
+        onCardDataListener?.getData()?.card = when (clicked) {
+            is DeckHolderListener.MonsterItemClickListener -> clicked.component.toCard()
+            is DeckHolderListener.SpellItemClickListener -> clicked.component.toCard()
+            is DeckHolderListener.TrapItemClickListener -> clicked.component.toCard()
+            is DeckOther.OtherMonsterItemClickListener -> clicked.component.toCard()
+            is DeckExtraListener.ExtraMonsterItemClickListener -> clicked.component.toCard()
         }
+
+        cardNavController.navigate(
+            R.id.action_deckFragment_to_deleteCardDetailFragment
+        )
     }
 }

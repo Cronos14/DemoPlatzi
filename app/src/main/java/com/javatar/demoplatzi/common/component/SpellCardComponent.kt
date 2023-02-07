@@ -1,5 +1,7 @@
 package com.javatar.demoplatzi.common.component
 
+import com.javatar.demoplatzi.common.factory.DeckItemType
+import com.javatar.demoplatzi.common.factory.DeckViewHolderFactory
 import com.javatar.domain.models.Image
 import com.javatar.domain.models.SpellCard
 import com.javatar.domain.value
@@ -14,7 +16,11 @@ class SpellCardComponent(
     val url: String,
     val urlSmall: String,
     val archetype: String,
-) : Component
+) : Component {
+    override fun type(): Int {
+        return DeckItemType.SPELL_CARD.type
+    }
+}
 
 fun SpellCard.toComponent() = SpellCardComponent(
     id,

@@ -7,28 +7,29 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.javatar.demoplatzi.common.component.Component
 import com.javatar.demoplatzi.common.component.MonsterCardComponent
+import com.javatar.demoplatzi.common.factory.DeckItemType
+import com.javatar.demoplatzi.common.factory.DeckViewHolderFactory
 import com.javatar.demoplatzi.common.listener.ComponentClickListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
 import com.javatar.demoplatzi.databinding.ItemMonsterCardBinding
 
-class MonsterCardView : ViewHolderWrapper<DeckHolderListener> {
+class MonsterCardView : ViewHolderWrapper<DeckExtraListener> {
 
     lateinit var binding: ItemMonsterCardBinding
 
-    override fun getViewHolder(root: ViewGroup): ComponentViewHolder<DeckHolderListener> {
+    override fun getViewHolder(root: ViewGroup): ComponentViewHolder<DeckExtraListener> {
         val layoutInflater = LayoutInflater.from(root.context)
         binding = ItemMonsterCardBinding.inflate(layoutInflater, root, false)
         return ViewHolder(binding.root)
     }
 
     inner class ViewHolder(itemView: View) :
-        ComponentViewHolder<DeckHolderListener>(itemView) {
+        ComponentViewHolder<DeckExtraListener>(itemView) {
 
         override fun bind(
             component: Component,
-            componentClickListener: ComponentClickListener<DeckHolderListener>?,
+            componentClickListener: ComponentClickListener<DeckExtraListener>?,
         ) {
-
             val card = component as? MonsterCardComponent
             with(binding) {
                 card?.let { card ->
@@ -42,7 +43,7 @@ class MonsterCardView : ViewHolderWrapper<DeckHolderListener> {
                     textViewDef.text = card.defense.toString()
                     root.setOnClickListener {
                         componentClickListener?.onComponentClicked(
-                            DeckHolderListener.GeneralItemClickListener(
+                            DeckExtraListener.ExtraMonsterItemClickListener(
                                 card
                             )
                         )

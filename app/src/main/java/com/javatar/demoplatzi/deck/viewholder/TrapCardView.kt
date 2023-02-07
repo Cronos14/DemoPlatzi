@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.javatar.demoplatzi.common.component.Component
 import com.javatar.demoplatzi.common.component.TrapCardComponent
+import com.javatar.demoplatzi.common.factory.DeckViewHolderFactory
 import com.javatar.demoplatzi.databinding.ItemTrapCardBinding
 import com.javatar.demoplatzi.common.listener.ComponentClickListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
@@ -39,7 +40,7 @@ class TrapCardView : ViewHolderWrapper<DeckHolderListener>{
                     textViewDescription.text = card.desc
                     root.setOnClickListener {
                         componentClickListener?.onComponentClicked(
-                            DeckHolderListener.GeneralItemClickListener(
+                            DeckHolderListener.TrapItemClickListener(
                                 card
                             )
                         )

@@ -8,6 +8,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.javatar.demoplatzi.common.component.Component
 import com.javatar.demoplatzi.common.component.SpellCardComponent
 import com.javatar.demoplatzi.common.component.TrapCardComponent
+import com.javatar.demoplatzi.common.factory.DeckViewHolderFactory
 import com.javatar.demoplatzi.databinding.ItemSpellCardBinding
 import com.javatar.demoplatzi.common.listener.ComponentClickListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
@@ -40,7 +41,7 @@ class SpellCardView : ViewHolderWrapper<DeckHolderListener>{
                     textViewDescription.text = card.desc
                     root.setOnClickListener {
                         componentClickListener?.onComponentClicked(
-                            DeckHolderListener.GeneralItemClickListener(
+                            DeckHolderListener.SpellItemClickListener(
                                 card
                             )
                         )

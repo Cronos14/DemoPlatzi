@@ -1,5 +1,6 @@
 package com.javatar.demoplatzi.common.component
 
+import com.javatar.demoplatzi.common.factory.DeckItemType
 import com.javatar.domain.models.Card
 import com.javatar.domain.value
 
@@ -11,7 +12,9 @@ class CardComponent(
     val race: String,
     val url: String,
     val urlSmall: String,
-) : Component
+) : Component {
+    override fun type() = DeckItemType.NONE.type
+}
 
 fun Card.toComponent() = CardComponent(
     id,

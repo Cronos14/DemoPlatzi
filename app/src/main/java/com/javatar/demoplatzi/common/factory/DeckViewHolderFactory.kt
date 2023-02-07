@@ -5,6 +5,7 @@ import com.javatar.demoplatzi.common.component.Component
 import com.javatar.demoplatzi.common.component.MonsterCardComponent
 import com.javatar.demoplatzi.common.component.SpellCardComponent
 import com.javatar.demoplatzi.common.component.TrapCardComponent
+import com.javatar.demoplatzi.common.listener.ComponentListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
 import com.javatar.demoplatzi.deck.viewholder.*
 
@@ -14,26 +15,19 @@ class DeckViewHolderFactory : ComponentViewHolderFactory<DeckHolderListener> {
         viewType: Int
     ): ComponentViewHolder<DeckHolderListener> {
         return when (viewType) {
-            ItemType.MONSTER_CARD.type -> MonsterCardView().getViewHolder(parent)
-            ItemType.SPELL_CARD.type -> SpellCardView().getViewHolder(parent)
-            ItemType.TRAP_CARD.type -> TrapCardView().getViewHolder(parent)
+            DeckItemType.MONSTER_CARD.type -> MonsterCardView().getViewHolder(parent)
+            DeckItemType.SPELL_CARD.type -> SpellCardView().getViewHolder(parent)
+            DeckItemType.TRAP_CARD.type -> TrapCardView().getViewHolder(parent)
             else -> EmptyView().getViewHolder(parent)
         }
     }
 
     override fun getViewType(component: Component): Int {
         return when (component) {
-            is MonsterCardComponent -> ItemType.MONSTER_CARD.type
-            is SpellCardComponent -> ItemType.SPELL_CARD.type
-            is TrapCardComponent -> ItemType.TRAP_CARD.type
-            else -> ItemType.NONE.type
+            is MonsterCardComponent -> DeckItemType.MONSTER_CARD.type
+            is SpellCardComponent -> DeckItemType.SPELL_CARD.type
+            is TrapCardComponent -> DeckItemType.TRAP_CARD.type
+            else -> DeckItemType.NONE.type
         }
-    }
-
-    enum class ItemType(val type: Int) {
-        NONE(0),
-        MONSTER_CARD(1),
-        SPELL_CARD(2),
-        TRAP_CARD(3)
     }
 }

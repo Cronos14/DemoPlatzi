@@ -17,15 +17,13 @@ class ViewHolderFactory<T : ComponentListener>(
         parent: ViewGroup,
         viewType: Int
     ): ComponentViewHolder<T> {
-
         viewHolders.forEachIndexed { index, pair ->
             if (index == viewType) {
-                return pair.second.getViewHolder(parent)
+                return pair.second.javaClass.newInstance().getViewHolder(parent)
+
             }
         }
-//
-//        return emptyHolder.getViewHolder(parent)
-        return viewHolders.first().second.getViewHolder(parent)
+        return viewHolders.first().second.javaClass.newInstance().getViewHolder(parent)
     }
 
     override fun getViewType(component: Component): Int {
@@ -34,7 +32,6 @@ class ViewHolderFactory<T : ComponentListener>(
                 return index
             }
         }
-
         return -1
     }
 }
