@@ -5,15 +5,14 @@ import com.javatar.demoplatzi.common.component.Component
 import com.javatar.demoplatzi.common.component.MonsterCardComponent
 import com.javatar.demoplatzi.common.component.SpellCardComponent
 import com.javatar.demoplatzi.common.component.TrapCardComponent
-import com.javatar.demoplatzi.common.listener.ComponentListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
 import com.javatar.demoplatzi.deck.viewholder.*
 
-class DeckViewHolderFactory : ComponentViewHolderFactory<DeckHolderListener> {
+class DeckViewHolderFactory : ComponentViewHolderFactory {
     override fun getViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ComponentViewHolder<DeckHolderListener> {
+    ): ComponentViewHolder {
         return when (viewType) {
             DeckItemType.MONSTER_CARD.type -> MonsterCardView().getViewHolder(parent)
             DeckItemType.SPELL_CARD.type -> SpellCardView().getViewHolder(parent)

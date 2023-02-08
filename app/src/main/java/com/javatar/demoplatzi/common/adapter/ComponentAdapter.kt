@@ -5,21 +5,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.javatar.demoplatzi.common.component.Component
 import com.javatar.demoplatzi.common.factory.ComponentViewHolderFactory
 import com.javatar.demoplatzi.common.listener.ComponentClickListener
-import com.javatar.demoplatzi.common.listener.ComponentListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
 
-open class ComponentAdapter<T : ComponentListener>(
-    private val componentViewHolderFactory: ComponentViewHolderFactory<T>,
+open class ComponentAdapter(
+    private val componentViewHolderFactory: ComponentViewHolderFactory,
     val components: ArrayList<Component>,
-    private val componentClickListener: ComponentClickListener<T>? = null
+    private val componentClickListener: ComponentClickListener? = null
 ) :
-    RecyclerView.Adapter<ComponentViewHolder<T>>() {
+    RecyclerView.Adapter<ComponentViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComponentViewHolder<T> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComponentViewHolder {
         return componentViewHolderFactory.getViewHolder(parent, viewType)
     }
 
-    override fun onBindViewHolder(holder: ComponentViewHolder<T>, position: Int) {
+    override fun onBindViewHolder(holder: ComponentViewHolder, position: Int) {
         return holder.bind(components[position], componentClickListener)
     }
 

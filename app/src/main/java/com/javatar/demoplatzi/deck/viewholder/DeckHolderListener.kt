@@ -8,7 +8,7 @@ import com.javatar.demoplatzi.common.listener.ComponentListener
 sealed interface DeckHolderListener : ComponentListener {
     class MonsterItemClickListener(val component: MonsterCardComponent) : DeckHolderListener
     class SpellItemClickListener(val component: SpellCardComponent) : DeckHolderListener
-    class TrapItemClickListener(val component: TrapCardComponent) : DeckHolderListener
+//    class TrapItemClickListener(val component: TrapCardComponent) : DeckHolderListener
 }
 
 sealed interface DeckOther : DeckHolderListener {

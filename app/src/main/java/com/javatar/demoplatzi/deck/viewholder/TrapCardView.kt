@@ -12,22 +12,22 @@ import com.javatar.demoplatzi.databinding.ItemTrapCardBinding
 import com.javatar.demoplatzi.common.listener.ComponentClickListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
 
-class TrapCardView : ViewHolderWrapper<DeckHolderListener>{
+class TrapCardView : ViewHolderWrapper{
 
     lateinit var binding: ItemTrapCardBinding
 
-    override fun getViewHolder(root: ViewGroup): ComponentViewHolder<DeckHolderListener> {
+    override fun getViewHolder(root: ViewGroup): ComponentViewHolder {
         val layoutInflater = LayoutInflater.from(root.context)
         binding = ItemTrapCardBinding.inflate(layoutInflater, root, false)
         return ViewHolder(binding.root)
     }
 
     inner class ViewHolder(itemView: View) :
-        ComponentViewHolder<DeckHolderListener>(itemView) {
+        ComponentViewHolder(itemView) {
 
         override fun bind(
             component: Component,
-            componentClickListener: ComponentClickListener<DeckHolderListener>?,
+            componentClickListener: ComponentClickListener?,
         ) {
             val card = component as? TrapCardComponent
             with(binding) {
@@ -40,7 +40,7 @@ class TrapCardView : ViewHolderWrapper<DeckHolderListener>{
                     textViewDescription.text = card.desc
                     root.setOnClickListener {
                         componentClickListener?.onComponentClicked(
-                            DeckHolderListener.TrapItemClickListener(
+                            EffectListener.TrapItemClickListener(
                                 card
                             )
                         )

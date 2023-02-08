@@ -15,8 +15,6 @@ import com.javatar.demoplatzi.common.adapter.ComponentAdapter
 import com.javatar.demoplatzi.common.component.*
 import com.javatar.demoplatzi.common.factory.DeckItemType
 import com.javatar.demoplatzi.common.factory.DeckViewHolderFactory
-import com.javatar.demoplatzi.common.factory.ViewHolderFactory
-import com.javatar.demoplatzi.common.factory.ViewHolderScalableFactory
 import com.javatar.demoplatzi.common.listener.*
 import com.javatar.demoplatzi.databinding.FragmentDeckBinding
 import com.javatar.demoplatzi.deck.viewholder.*
@@ -24,7 +22,7 @@ import com.javatar.demoplatzi.deck.viewmodel.DeckViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DeckFragment : Fragment(R.layout.fragment_deck), ComponentClickListener<DeckHolderListener> {
+class DeckFragment : Fragment(R.layout.fragment_deck), ComponentClickListener {
 
     private lateinit var binding: FragmentDeckBinding
     private val viewModel: DeckViewModel by viewModels()
@@ -127,17 +125,28 @@ class DeckFragment : Fragment(R.layout.fragment_deck), ComponentClickListener<De
         binding.recyclerViewDeck.isVisible = !value
     }
 
-    override fun onComponentClicked(clicked: DeckHolderListener) {
-        onCardDataListener?.getData()?.card = when (clicked) {
-            is DeckHolderListener.MonsterItemClickListener -> clicked.component.toCard()
-            is DeckHolderListener.SpellItemClickListener -> clicked.component.toCard()
-            is DeckHolderListener.TrapItemClickListener -> clicked.component.toCard()
-            is DeckOther.OtherMonsterItemClickListener -> clicked.component.toCard()
-            is DeckExtraListener.ExtraMonsterItemClickListener -> clicked.component.toCard()
+    override fun onComponentClicked(clicked: ComponentListener) {
+        when (clicked) {
+            is DeckHolderListener -> deckHolderListener(clicked)
+            is EffectListener -> effectListener(clicked)
         }
-
         cardNavController.navigate(
             R.id.action_deckFragment_to_deleteCardDetailFragment
         )
+    }
+
+    private fun deckHolderListener(deckHolderListener: DeckHolderListener) {
+        onCardDataListener?.getData()?.card = when (deckHolderListener) {
+            is DeckHolderListener.MonsterItemClickListener -> deckHolderListener.component.toCard()
+            is DeckHolderListener.SpellItemClickListener -> deckHolderListener.component.toCard()
+            is DeckOther.OtherMonsterItemClickListener -> deckHolderListener.component.toCard()
+            is DeckExtraListener.ExtraMonsterItemClickListener -> deckHolderListener.component.toCard()
+        }
+    }
+
+    private fun effectListener(effectListener: EffectListener) {
+        onCardDataListener?.getData()?.card = when (effectListener) {
+            is EffectListener.TrapItemClickListener -> effectListener.component.toCard()
+        }
     }
 }

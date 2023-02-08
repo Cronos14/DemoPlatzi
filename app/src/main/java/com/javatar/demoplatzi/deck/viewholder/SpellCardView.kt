@@ -13,22 +13,22 @@ import com.javatar.demoplatzi.databinding.ItemSpellCardBinding
 import com.javatar.demoplatzi.common.listener.ComponentClickListener
 import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
 
-class SpellCardView : ViewHolderWrapper<DeckHolderListener>{
+class SpellCardView : ViewHolderWrapper{
 
     lateinit var binding: ItemSpellCardBinding
 
-    override fun getViewHolder(root: ViewGroup): ComponentViewHolder<DeckHolderListener> {
+    override fun getViewHolder(root: ViewGroup): ComponentViewHolder {
         val layoutInflater = LayoutInflater.from(root.context)
         binding = ItemSpellCardBinding.inflate(layoutInflater, root, false)
         return ViewHolder(binding.root)
     }
 
     inner class ViewHolder(itemView: View) :
-        ComponentViewHolder<DeckHolderListener,>(itemView) {
+        ComponentViewHolder(itemView) {
 
         override fun bind(
             component: Component,
-            componentClickListener: ComponentClickListener<DeckHolderListener>?,
+            componentClickListener: ComponentClickListener?,
         ) {
             val card = component as? SpellCardComponent
             with(binding) {

@@ -10,13 +10,13 @@ import com.javatar.demoplatzi.common.viewholder.ComponentViewHolder
 import com.javatar.demoplatzi.deck.viewholder.*
 
 class ViewHolderFactory<T : ComponentListener>(
-    private val viewHolders: List<Pair<Class<*>,ViewHolderWrapper<T>>>,
-) : ComponentViewHolderFactory<T> {
+    private val viewHolders: List<Pair<Class<*>,ViewHolderWrapper>>,
+) : ComponentViewHolderFactory {
 
     override fun getViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ComponentViewHolder<T> {
+    ): ComponentViewHolder {
         viewHolders.forEachIndexed { index, pair ->
             if (index == viewType) {
                 return pair.second.javaClass.newInstance().getViewHolder(parent)
