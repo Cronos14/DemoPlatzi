@@ -14,7 +14,7 @@ import com.javatar.demoplatzi.R
 import com.javatar.demoplatzi.common.adapter.ComponentAdapter
 import com.javatar.demoplatzi.common.component.*
 import com.javatar.demoplatzi.common.factory.DeckItemType
-import com.javatar.demoplatzi.common.factory.DeckViewHolderFactory
+import com.javatar.demoplatzi.common.factory.ViewHolderFactory
 import com.javatar.demoplatzi.common.listener.*
 import com.javatar.demoplatzi.databinding.FragmentDeckBinding
 import com.javatar.demoplatzi.deck.viewholder.*
@@ -72,6 +72,12 @@ class DeckFragment : Fragment(R.layout.fragment_deck), ComponentClickListener {
             Pair(TrapCardComponent::class.java, TrapCardView())
         )
 
+        val viewHoldersOnly = listOf(
+            MonsterCardView(),
+            SpellCardView(),
+            TrapCardView()
+        )
+
         val viewHoldersScalable = linkedMapOf(
             Pair(DeckItemType.MONSTER_CARD.type, MonsterCardView()),
             Pair(DeckItemType.SPELL_CARD.type, SpellCardView()),
@@ -80,11 +86,11 @@ class DeckFragment : Fragment(R.layout.fragment_deck), ComponentClickListener {
 
         with(binding) {
             recyclerViewDeck.adapter = ComponentAdapter(
-                DeckViewHolderFactory(),
-//                ViewHolderFactory(
-//                    //Error by generic, remember that the generic type is the same of the class and only can be one
-//                    viewHolders
-//                ),
+//                DeckViewHolderFactory(),
+                ViewHolderFactory(
+                    //Error by generic, remember that the generic type is the same of the class and only can be one
+                    viewHoldersOnly
+                ),
 //                ViewHolderScalableFactory(
 //                    viewHoldersScalable
 //                ),

@@ -12,10 +12,9 @@ class ViewHolderScalableFactory(
         parent: ViewGroup,
         viewType: Int
     ): ComponentViewHolder {
-        // is necessary instance the class
         viewHoldersMap[viewType]?.let {
-            return (it.javaClass.newInstance().getViewHolder(parent))
+            return (it.getViewHolder(parent))
         }
-        return viewHoldersMap.values.first().javaClass.newInstance().getViewHolder(parent)
+        return viewHoldersMap.values.first().getViewHolder(parent)
     }
 }
